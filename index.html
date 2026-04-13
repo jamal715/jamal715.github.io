@@ -10,710 +10,141 @@
     <style>
         :root {
             --navy: #0b1d2c;
-            --navy-mid: #122a3e;
-            --deep: #163044;
             --accent: #c4a23f;
             --accent-light: #dbb94e;
-            --accent-glow: rgba(196, 162, 63, 0.12);
             --cream: #f6f4ef;
-            --warm: #efeae0;
-            --card: #ffffff;
-            --card-hover: #fdfcfa;
+            --warm: #eee9dd;
             --text: #1a1a1a;
             --text-mid: #4b4b4b;
             --text-light: #7a7a7a;
-            --border: rgba(184, 149, 62, 0.15);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.06);
-            --shadow-lg: 0 8px 16px rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.08);
-            --radius: 14px;
-            --max-w: 860px;
+            --border: rgba(0,0,0,0.07);
+            --max-w: 780px;
         }
-
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Outfit', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text);
-            background: var(--cream);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
+            font-size: 16px; line-height: 1.75;
+            color: var(--text); background: var(--cream);
+            -webkit-font-smoothing: antialiased; overflow-x: hidden;
         }
 
-        /* ═══════════════════════════════════
-           NAVIGATION
-        ═══════════════════════════════════ */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(11, 29, 44, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(196, 162, 63, 0.25);
-            transition: background 0.3s, box-shadow 0.3s;
-        }
+        /* NAV */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(11,29,44,0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(196,162,63,0.25); transition: box-shadow 0.3s; }
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.18); }
+        .navbar-inner { max-width: 1060px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+        .nav-brand { font-family: 'Cormorant Garamond', serif; font-weight: 800; font-size: 24px; color: var(--accent); letter-spacing: 4px; text-decoration: none; }
+        .nav-links { display: flex; gap: 2px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 13px; border-radius: 5px; transition: color 0.25s, background 0.25s; }
+        .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--accent); margin: 5px 0; border-radius: 2px; }
 
-        .navbar.scrolled {
-            background: rgba(11, 29, 44, 0.97);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
-        }
+        /* HERO */
+        .hero { background: linear-gradient(165deg, #071320 0%, #0b1d2c 30%, #153650 70%, #1a4060 100%); color: #fff; text-align: center; padding: 150px 24px 100px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -30%; width: 160%; height: 200%; background: radial-gradient(ellipse at 40% 40%, rgba(196,162,63,0.06) 0%, transparent 50%); pointer-events: none; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to bottom, transparent, var(--cream)); pointer-events: none; }
+        .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(196,162,63,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(196,162,63,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+        .hero-badge { display: inline-block; font-size: 11px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 26px; padding: 7px 18px; border: 1px solid rgba(196,162,63,0.3); border-radius: 40px; background: rgba(196,162,63,0.06); }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 7vw, 60px); font-weight: 800; line-height: 1.08; margin-bottom: 22px; }
+        .hero h1 em { font-style: normal; color: var(--accent); }
+        .hero-desc { font-size: 17px; color: rgba(255,255,255,0.5); max-width: 460px; margin: 0 auto; font-weight: 300; line-height: 1.8; }
+        .hero-line { width: 48px; height: 2px; background: var(--accent); margin: 32px auto 0; border-radius: 2px; }
 
-        .navbar-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 64px;
-        }
+        /* PAGE */
+        .page-body { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+        .section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+        .section:last-child { border-bottom: none; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 8px; display: block; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 4vw, 34px); font-weight: 700; color: var(--navy); line-height: 1.2; }
+        .section-rule { width: 36px; height: 2px; background: var(--accent); margin: 16px auto 0; border-radius: 2px; }
 
-        .nav-brand {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 800;
-            font-size: 26px;
-            color: var(--accent);
-            letter-spacing: 4px;
-            text-decoration: none;
-        }
+        /* FOUNDERS */
+        .founders-row { display: flex; gap: 56px; justify-content: center; flex-wrap: wrap; }
+        .founder { text-align: center; flex: 0 1 300px; }
+        .founder-avatar { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 22px; padding: 3px; background: linear-gradient(135deg, var(--accent), var(--accent-light)); }
+        .founder-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--cream); }
+        .founder-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+        .founder-role { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+        .founder-bio { font-size: 14.5px; color: var(--text-mid); line-height: 1.8; }
+        .btn-linkedin { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; padding: 9px 20px; background: var(--navy); color: #fff; text-decoration: none; border-radius: 6px; font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; font-weight: 600; transition: background 0.3s, transform 0.2s; }
+        .btn-linkedin:hover { background: var(--accent); color: var(--navy); transform: translateY(-1px); }
+        .btn-linkedin svg { width: 13px; height: 13px; fill: currentColor; }
 
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            list-style: none;
-        }
+        /* LISTS */
+        .clean-list { list-style: none; max-width: 500px; margin: 0 auto; }
+        .clean-list li { padding: 13px 0 13px 28px; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text); position: relative; }
+        .clean-list li:last-child { border-bottom: none; }
+        .clean-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--accent); }
 
-        .nav-links a {
-            color: rgba(255,255,255,0.55);
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 12.5px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 8px 14px;
-            border-radius: 6px;
-            transition: color 0.25s, background 0.25s;
-        }
+        /* MODEL */
+        .model-cols { display: flex; gap: 0; max-width: 560px; margin: 0 auto; }
+        .model-col { flex: 1; padding: 0 28px; }
+        .model-col:first-child { border-right: 1px solid var(--border); }
+        .model-col-title { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+        .model-col ul { list-style: none; }
+        .model-col li { padding: 9px 0 9px 20px; font-size: 14.5px; color: var(--text); position: relative; }
+        .model-col li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-        .nav-links a:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.06);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .nav-toggle span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--accent);
-            margin: 5px 0;
-            border-radius: 2px;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        /* ═══════════════════════════════════
-           HERO
-        ═══════════════════════════════════ */
-        .hero {
-            background: linear-gradient(165deg, #071320 0%, #0b1d2c 30%, #153650 70%, #1a4060 100%);
-            color: #fff;
-            text-align: center;
-            padding: 160px 24px 110px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -30%;
-            width: 160%;
-            height: 200%;
-            background: radial-gradient(ellipse at 40% 40%, rgba(196,162,63,0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 120px;
-            background: linear-gradient(to bottom, transparent, var(--cream));
-            pointer-events: none;
-        }
-
-        /* floating grid pattern */
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(196,162,63,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(196,162,63,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 680px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            font-size: 11.5px;
-            letter-spacing: 4.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 28px;
-            padding: 8px 20px;
-            border: 1px solid rgba(196,162,63,0.3);
-            border-radius: 40px;
-            background: rgba(196,162,63,0.06);
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(38px, 7vw, 64px);
-            font-weight: 800;
-            line-height: 1.08;
-            margin-bottom: 24px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--accent);
-        }
-
-        .hero-desc {
-            font-size: 17px;
-            color: rgba(255,255,255,0.5);
-            max-width: 480px;
-            margin: 0 auto;
-            font-weight: 300;
-            line-height: 1.8;
-        }
-
-        .hero-line {
-            width: 50px;
-            height: 2px;
-            background: var(--accent);
-            margin: 36px auto 0;
-            border-radius: 2px;
-        }
-
-        /* ═══════════════════════════════════
-           MAIN CONTAINER
-        ═══════════════════════════════════ */
-        .main-container {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ═══════════════════════════════════
-           SECTION COMMON
-        ═══════════════════════════════════ */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section + .section {
-            border-top: 1px solid rgba(0,0,0,0.04);
-        }
-
-        .card {
-            background: var(--card);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: var(--radius);
-            padding: 56px 48px;
-            box-shadow: var(--shadow-md);
-            transition: box-shadow 0.4s;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-lg);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .section-label {
-            font-size: 11px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(28px, 4vw, 36px);
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 0;
-            line-height: 1.2;
-        }
-
-        .section-rule {
-            width: 40px;
-            height: 2px;
-            background: var(--accent);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        /* ═══════════════════════════════════
-           FOUNDERS
-        ═══════════════════════════════════ */
-        .founders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 48px;
-            margin-top: 8px;
-        }
-
-        .founder-card {
-            text-align: center;
-        }
-
-        .founder-avatar {
-            width: 152px;
-            height: 152px;
-            border-radius: 50%;
-            margin: 0 auto 24px;
-            padding: 3px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            position: relative;
-        }
-
-        .founder-avatar img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 3px solid var(--card);
-        }
-
-        .founder-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 25px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 4px;
-        }
-
-        .founder-title {
-            font-size: 11px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 18px;
-        }
-
-        .founder-bio {
-            font-size: 14.5px;
-            color: var(--text-mid);
-            line-height: 1.85;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .btn-linkedin {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            padding: 10px 22px;
-            background: var(--navy);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 11.5px;
-            letter-spacing: 1.3px;
-            text-transform: uppercase;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .btn-linkedin:hover {
-            background: var(--accent);
-            color: var(--navy);
-            transform: translateY(-1px);
-        }
-
-        .btn-linkedin svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        /* ═══════════════════════════════════
-           MISSION / IMPACT (list style)
-        ═══════════════════════════════════ */
-        .feature-list {
-            list-style: none;
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        .feature-list li {
-            padding: 15px 0 15px 32px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            font-size: 15px;
-            color: var(--text);
-            position: relative;
-        }
-
-        .feature-list li:last-child { border-bottom: none; }
-
-        .feature-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-            background: transparent;
-            transition: background 0.25s;
-        }
-
-        .feature-list li:hover::before {
-            background: var(--accent);
-        }
-
-        /* ═══════════════════════════════════
-           MODEL (split columns)
-        ═══════════════════════════════════ */
-        .model-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .model-col {
-            padding: 0 28px;
-        }
-
-        .model-col:first-child {
-            border-right: 1px solid rgba(0,0,0,0.06);
-        }
-
-        .model-col-label {
-            font-size: 11px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 14px;
-        }
-
-        .model-col ul {
-            list-style: none;
-        }
-
-        .model-col li {
-            padding: 10px 0 10px 22px;
-            font-size: 14.5px;
-            color: var(--text);
-            position: relative;
-        }
-
-        .model-col li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
-        /* ═══════════════════════════════════
-           STATS (crisis section)
-        ═══════════════════════════════════ */
-        .stats-row {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 28px 36px;
-            background: var(--warm);
-            border-radius: 12px;
-            min-width: 200px;
-            flex: 1;
-            max-width: 280px;
-            transition: transform 0.25s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .stat-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 44px;
-            font-weight: 800;
-            color: var(--navy);
-            line-height: 1.15;
-        }
-
-        .stat-caption {
-            font-size: 12px;
-            color: var(--text-light);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 6px;
-            font-weight: 500;
-        }
-
-        .crisis-desc {
-            font-size: 15px;
-            color: var(--text-mid);
-            max-width: 480px;
-            margin: 0 auto 28px;
-            text-align: center;
-            line-height: 1.85;
-        }
-
-        .btn-outline {
-            display: inline-block;
-            color: var(--navy);
-            font-weight: 600;
-            font-size: 12px;
-            text-decoration: none;
-            border: 1px solid var(--navy);
-            padding: 12px 32px;
-            border-radius: 8px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-        }
-
-        .btn-outline:hover {
-            background: var(--navy);
-            color: var(--accent);
-            transform: translateY(-1px);
-        }
-
+        /* STATS */
+        .stats-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+        .stat-box { text-align: center; padding: 24px 32px; background: var(--warm); border-radius: 10px; min-width: 190px; flex: 1; max-width: 260px; }
+        .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 800; color: var(--navy); line-height: 1.15; }
+        .stat-label { font-size: 12px; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; font-weight: 500; }
+        .crisis-text { font-size: 15px; color: var(--text-mid); max-width: 460px; margin: 0 auto 24px; text-align: center; line-height: 1.85; }
+        .btn-outline { display: inline-block; color: var(--navy); font-weight: 600; font-size: 12px; text-decoration: none; border: 1px solid var(--navy); padding: 11px 28px; border-radius: 6px; letter-spacing: 1.5px; text-transform: uppercase; transition: background 0.3s, color 0.3s; }
+        .btn-outline:hover { background: var(--navy); color: var(--accent); }
         .text-center { text-align: center; }
 
-        /* ═══════════════════════════════════
-           CONTACT
-        ═══════════════════════════════════ */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-top: 8px;
-        }
+        /* CONTACT */
+        .contact-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .contact-item { background: var(--warm); border-radius: 10px; padding: 26px 24px; text-align: center; flex: 1; min-width: 180px; max-width: 240px; }
+        .contact-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+        .contact-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+        .contact-item p { font-size: 14px; color: var(--text-mid); }
+        .contact-item a { color: var(--navy); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .contact-item a:hover { color: var(--accent); }
 
-        .contact-item {
-            background: var(--warm);
-            border-radius: 12px;
-            padding: 30px 24px;
-            text-align: center;
-            transition: transform 0.25s, box-shadow 0.25s;
-        }
+        /* FOOTER */
+        .site-footer { background: var(--navy); color: rgba(255,255,255,0.35); text-align: center; padding: 32px 20px; font-size: 13px; letter-spacing: 0.8px; border-top: 2px solid var(--accent); margin-top: 20px; }
+        .site-footer span { color: var(--accent); font-weight: 600; }
 
-        .contact-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-sm);
-        }
+        /* ANIMATIONS */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .contact-icon {
-            font-size: 26px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .contact-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 6px;
-        }
-
-        .contact-item p {
-            font-size: 14.5px;
-            color: var(--text-mid);
-        }
-
-        .contact-item a {
-            color: var(--navy);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.25s;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent);
-        }
-
-        /* ═══════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════ */
-        .site-footer {
-            background: var(--navy);
-            color: rgba(255,255,255,0.35);
-            text-align: center;
-            padding: 36px 20px;
-            font-size: 13px;
-            letter-spacing: 0.8px;
-            border-top: 2px solid var(--accent);
-        }
-
-        .site-footer span {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* ═══════════════════════════════════
-           ANIMATIONS
-        ═══════════════════════════════════ */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* stagger children */
-        .stagger > *:nth-child(1) { transition-delay: 0s; }
-        .stagger > *:nth-child(2) { transition-delay: 0.12s; }
-        .stagger > *:nth-child(3) { transition-delay: 0.24s; }
-        .stagger > *:nth-child(4) { transition-delay: 0.36s; }
-
-        /* ═══════════════════════════════════
-           RESPONSIVE
-        ═══════════════════════════════════ */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .navbar-inner { padding: 0 20px; }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: rgba(11, 29, 44, 0.97);
-                padding: 16px 20px;
-                border-bottom: 1px solid rgba(196,162,63,0.2);
-            }
-
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: rgba(11,29,44,0.97); padding: 12px 20px; border-bottom: 1px solid rgba(196,162,63,0.2); }
             .nav-links.open { display: flex; }
-
-            .nav-links a {
-                padding: 12px 16px;
-                font-size: 13px;
-            }
-
+            .nav-links a { padding: 11px 14px; font-size: 13px; }
             .nav-toggle { display: block; }
-
-            .hero { padding: 130px 20px 90px; }
-
-            .section { padding: 56px 0; }
-
-            .card { padding: 40px 24px; }
-
-            .founders-grid { gap: 40px; }
-
-            .model-grid {
-                grid-template-columns: 1fr;
-                gap: 28px;
-            }
-
-            .model-col:first-child {
-                border-right: none;
-                border-bottom: 1px solid rgba(0,0,0,0.06);
-                padding-bottom: 24px;
-            }
-
+            .hero { padding: 130px 20px 80px; }
+            .section { padding: 52px 0; }
+            .founders-row { flex-direction: column; align-items: center; gap: 40px; }
+            .model-cols { flex-direction: column; gap: 24px; }
+            .model-col:first-child { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
             .model-col { padding: 0; }
-
-            .stats-row {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .stat-card { max-width: 100%; width: 100%; }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-row { flex-direction: column; align-items: center; }
+            .stat-box { max-width: 100%; width: 100%; }
+            .contact-row { flex-direction: column; align-items: center; }
+            .contact-item { max-width: 100%; width: 100%; }
         }
-
         @media (max-width: 480px) {
-            .hero { padding: 120px 16px 70px; }
+            .hero { padding: 120px 16px 65px; }
             .hero-desc { font-size: 15px; }
-            .card { padding: 32px 20px; }
-            .section-title { font-size: 26px; }
-            .founders-grid { grid-template-columns: 1fr; }
+            .page-body { padding: 0 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════ NAVIGATION ═══════════ -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
             <a href="#" class="nav-brand">SMF</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#founders">Founders</a></li>
                 <li><a href="#mission">Mission</a></li>
@@ -725,7 +156,6 @@
         </div>
     </nav>
 
-    <!-- ═══════════ HERO ═══════════ -->
     <header class="hero">
         <div class="hero-grid"></div>
         <div class="hero-content">
@@ -736,199 +166,149 @@
         </div>
     </header>
 
-    <!-- ═══════════ MAIN ═══════════ -->
-    <main class="main-container">
+    <div class="page-body">
 
-        <!-- ── FOUNDERS ── -->
-        <section class="section" id="founders">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">Leadership</span>
-                    <h2 class="section-title">Our Founders</h2>
-                    <div class="section-rule"></div>
+        <section class="section fade-in" id="founders">
+            <div class="section-header">
+                <span class="section-label">Leadership</span>
+                <h2 class="section-title">Our Founders</h2>
+                <div class="section-rule"></div>
+            </div>
+            <div class="founders-row">
+                <div class="founder">
+                    <div class="founder-avatar"><img src="JAMAL - SMF.jpg" alt="Jamal Nasir"></div>
+                    <h3 class="founder-name">Jamal Nasir</h3>
+                    <p class="founder-role">Founder</p>
+                    <p class="founder-bio">Trained at LUMS with a Master's in Financial Management. Bachelor's in Economics &amp; Mathematics from IBA Karachi. Currently at the Ministry of Finance. Founder of QuantOra.</p>
+                    <a href="https://www.linkedin.com/in/jamal-nasir-5696b3222" target="_blank" rel="noopener" class="btn-linkedin"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
                 </div>
-                <div class="founders-grid stagger">
-                    <div class="founder-card fade-up">
-                        <div class="founder-avatar">
-                            <img src="JAMAL - SMF.jpg" alt="Jamal Nasir">
-                        </div>
-                        <h3 class="founder-name">Jamal Nasir</h3>
-                        <p class="founder-title">Founder</p>
-                        <p class="founder-bio">Trained at LUMS in Financial Management and served as a Research Associate. Bachelor's in Economics &amp; Mathematics from IBA Karachi. Currently at the Ministry of Finance, Pakistan. Founder of QuantOra and generated 5000 Euros since its inception</p>
-                        <a href="https://www.linkedin.com/in/jamal-nasir-5696b3222" target="_blank" rel="noopener" class="btn-linkedin">
-                            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                    <div class="founder-card fade-up">
-                        <div class="founder-avatar">
-                            <img src="noshaba.jpeg" alt="Noshaba Nasir">
-                        </div>
-                        <h3 class="founder-name">Noshaba Nasir</h3>
-                        <p class="founder-title">Co-Founder</p>
-                        <p class="founder-bio">Graduate of Development Studies from IBA KARACHI. Actively involved in providing education to remote areas. Currently conducting field research on children's education in underserved communities.</p>
-                        
-                            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            LinkedIn
-                        </a>
-                    </div>
+                <div class="founder">
+                    <div class="founder-avatar"><img src="noshaba.jpeg" alt="Noshaba Nasir"></div>
+                    <h3 class="founder-name">Noshaba Nasir</h3>
+                    <p class="founder-role">Co-Founder</p>
+                    <p class="founder-bio">Student of Development Studies. Actively involved in providing education to remote areas. Currently conducting field research on children's education in underserved communities.</p>
+                    <a href="https://www.linkedin.com/in/noshaba-nasir-557580279/" target="_blank" rel="noopener" class="btn-linkedin"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
                 </div>
             </div>
         </section>
 
-        <!-- ── MISSION ── -->
-        <section class="section" id="mission">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">Purpose</span>
-                    <h2 class="section-title">Our Mission</h2>
-                    <div class="section-rule"></div>
-                </div>
-                <ul class="feature-list stagger">
-                    <li class="fade-up">Provide services to students and professionals</li>
-                    <li class="fade-up">Generate revenue through skill-based work</li>
-                    <li class="fade-up">Build a sustainable student-focused fund</li>
-                    <li class="fade-up">Support education access in Pakistan</li>
-                </ul>
+        <section class="section fade-in" id="mission">
+            <div class="section-header">
+                <span class="section-label">Purpose</span>
+                <h2 class="section-title">Our Mission</h2>
+                <div class="section-rule"></div>
             </div>
+            <ul class="clean-list">
+                <li>Provide services to students and professionals</li>
+                <li>Generate revenue through skill-based work</li>
+                <li>Build a sustainable student-focused fund</li>
+                <li>Support education access in Pakistan</li>
+            </ul>
         </section>
 
-        <!-- ── MODEL ── -->
-        <section class="section" id="model">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">Business Model</span>
-                    <h2 class="section-title">How It Works</h2>
-                    <div class="section-rule"></div>
+        <section class="section fade-in" id="model">
+            <div class="section-header">
+                <span class="section-label">Business Model</span>
+                <h2 class="section-title">How It Works</h2>
+                <div class="section-rule"></div>
+            </div>
+            <div class="model-cols">
+                <div class="model-col">
+                    <p class="model-col-title">Revenue</p>
+                    <ul>
+                        <li>Services provided to clients</li>
+                        <li>Revenue generated globally</li>
+                        <li>70% to service providers</li>
+                        <li>30% allocated to fund</li>
+                    </ul>
                 </div>
-                <div class="model-grid">
-                    <div class="model-col">
-                        <p class="model-col-label">Revenue</p>
-                        <ul>
-                            <li>Services provided to clients</li>
-                            <li>Revenue generated globally</li>
-                            <li>70% to service providers</li>
-                            <li>30% allocated to fund</li>
-                        </ul>
-                    </div>
-                    <div class="model-col">
-                        <p class="model-col-label">Investment</p>
-                        <ul>
-                            <li>Fund invested in Pakistan markets</li>
-                            <li>Includes stocks and bonds</li>
-                            <li>Returns reinvested for impact</li>
-                        </ul>
-                    </div>
+                <div class="model-col">
+                    <p class="model-col-title">Investment</p>
+                    <ul>
+                        <li>Fund invested in Pakistan markets</li>
+                        <li>Includes stocks and bonds</li>
+                        <li>Returns reinvested for impact</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- ── IMPACT / GOALS ── -->
-        <section class="section" id="impact">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">Impact</span>
-                    <h2 class="section-title">Our Goal</h2>
-                    <div class="section-rule"></div>
+        <section class="section fade-in" id="impact">
+            <div class="section-header">
+                <span class="section-label">Impact</span>
+                <h2 class="section-title">Our Goal</h2>
+                <div class="section-rule"></div>
+            </div>
+            <ul class="clean-list">
+                <li>Support female education in Pakistan</li>
+                <li>Reduce education inequality</li>
+                <li>Empower future generations</li>
+                <li>Create long-term financial sustainability</li>
+            </ul>
+        </section>
+
+        <section class="section fade-in" id="crisis">
+            <div class="section-header">
+                <span class="section-label">The Crisis</span>
+                <h2 class="section-title">Why This Matters</h2>
+                <div class="section-rule"></div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-num">26.2M</div>
+                    <p class="stat-label">Children out of school</p>
                 </div>
-                <ul class="feature-list stagger">
-                    <li class="fade-up">Support female education in Pakistan</li>
-                    <li class="fade-up">Reduce education inequality</li>
-                    <li class="fade-up">Empower future generations</li>
-                    <li class="fade-up">Create long-term financial sustainability</li>
-                </ul>
+                <div class="stat-box">
+                    <div class="stat-num">&#9792;</div>
+                    <p class="stat-label">Girls disproportionately affected</p>
+                </div>
+            </div>
+            <p class="crisis-text">Access to education remains a major challenge across Pakistan. Millions of children — especially girls — are denied the opportunity to learn.</p>
+            <div class="text-center">
+                <a href="https://www.dawn.com/news/amp/1975945" target="_blank" rel="noopener" class="btn-outline">Read Full Article &rarr;</a>
             </div>
         </section>
 
-        <!-- ── CRISIS ── -->
-        <section class="section" id="crisis">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">The Crisis</span>
-                    <h2 class="section-title">Why This Matters</h2>
-                    <div class="section-rule"></div>
-                </div>
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div class="stat-number">26.2M</div>
-                        <p class="stat-caption">Children out of school</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">&#9792;</div>
-                        <p class="stat-caption">Girls disproportionately affected</p>
-                    </div>
-                </div>
-                <p class="crisis-desc">Access to education remains a major challenge across Pakistan. Millions of children — especially girls — are denied the opportunity to learn.</p>
-                <div class="text-center">
-                    <a href="https://www.dawn.com/news/amp/1975945" target="_blank" rel="noopener" class="btn-outline">Read Full Article &rarr;</a>
-                </div>
+        <section class="section fade-in" id="contact">
+            <div class="section-header">
+                <span class="section-label">Reach Out</span>
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="section-rule"></div>
             </div>
-        </section>
-
-        <!-- ── CONTACT ── -->
-        <section class="section" id="contact">
-            <div class="card fade-up">
-                <div class="section-header">
-                    <span class="section-label">Reach Out</span>
-                    <h2 class="section-title">Get in Touch</h2>
-                    <div class="section-rule"></div>
+            <div class="contact-row">
+                <div class="contact-item">
+                    <span class="contact-icon">&#9993;</span>
+                    <h3>Email</h3>
+                    <p><a href="mailto:j.nasir25260@gmail.com">j.nasir25260@gmail.com</a></p>
                 </div>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <span class="contact-icon">&#9993;</span>
-                        <h3>Email</h3>
-                        <p><a href="mailto:j.nasir25260@gmail.com">j.nasir25260@gmail.com</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">&#128205;</span>
-                        <h3>Location</h3>
-                        <p>Karachi, Pakistan</p>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">&#128241;</span>
-                        <h3>Phone</h3>
-                        <p><a href="tel:+923076217032">+92 307 6217032</a></p>
-                    </div>
+                <div class="contact-item">
+                    <span class="contact-icon">&#128205;</span>
+                    <h3>Location</h3>
+                    <p>Karachi, Pakistan</p>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">&#128241;</span>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+923076217032">+92 307 6217032</a></p>
                 </div>
             </div>
         </section>
 
-    </main>
+    </div>
 
-    <!-- ═══════════ FOOTER ═══════════ -->
-    <footer class="site-footer">
-        &copy; 2025 <span>Student Management Fund</span>. All rights reserved.
-    </footer>
+    <footer class="site-footer">&copy; 2025 <span>Student Management Fund</span>. All rights reserved.</footer>
 
-    <!-- ═══════════ SCRIPTS ═══════════ -->
     <script>
-        // ── Mobile nav toggle
         const toggle = document.getElementById('navToggle');
         const links = document.getElementById('navLinks');
         toggle.addEventListener('click', () => links.classList.toggle('open'));
-
-        // Close nav on link click (mobile)
-        links.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => links.classList.remove('open'));
-        });
-
-        // ── Navbar scroll effect
+        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
         const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 40);
-        });
-
-        // ── Intersection Observer for fade-up animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
     </script>
 
 </body>
