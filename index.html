@@ -4,211 +4,323 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management Fund</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        : root {
-            --navy: #0e2233;
+        :root {
+            --navy: #0b1d2c;
+            --navy-mid: #122a3e;
             --deep: #163044;
-            --accent: #b8953e;
-            --accent-light: #d4b04e;
-            --cream: #faf7f0;
-            --warm: #f5f1e8;
+            --accent: #c4a23f;
+            --accent-light: #dbb94e;
+            --accent-glow: rgba(196, 162, 63, 0.12);
+            --cream: #f6f4ef;
+            --warm: #efeae0;
             --card: #ffffff;
-            --text: #1e1e1e;
-            --text-mid: #4a4a4a;
-            --text-light: #717171;
-            --border: rgba(184,149,62,0.18);
+            --card-hover: #fdfcfa;
+            --text: #1a1a1a;
+            --text-mid: #4b4b4b;
+            --text-light: #7a7a7a;
+            --border: rgba(184, 149, 62, 0.15);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.08);
+            --radius: 14px;
+            --max-w: 860px;
         }
- 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
-            font-family: 'Lora', 'Georgia', serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 1.7;
             color: var(--text);
             background: var(--cream);
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
- 
-        /* ── NAV ── */
-        nav {
-            background: var(--navy);
-            padding: 0 40px;
+
+        /* ═══════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 29, 44, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(196, 162, 63, 0.25);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(11, 29, 44, 0.97);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--accent);
+            height: 64px;
         }
- 
+
         .nav-brand {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 800;
-            font-size: 24px;
+            font-size: 26px;
             color: var(--accent);
-            padding: 18px 0;
-            letter-spacing: 3px;
-        }
- 
-        .nav-links { display: flex; gap: 0; }
- 
-        .nav-links a {
-            color: rgba(255,255,255,0.65);
+            letter-spacing: 4px;
             text-decoration: none;
-            font-family: 'Lora', serif;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            padding: 22px 18px;
-            transition: all 0.3s;
-            border-bottom: 2px solid transparent;
         }
- 
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: color 0.25s, background 0.25s;
+        }
+
         .nav-links a:hover {
             color: #fff;
-            border-bottom-color: var(--accent);
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.06);
         }
- 
-        /* ── HERO ── */
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--accent);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* ═══════════════════════════════════
+           HERO
+        ═══════════════════════════════════ */
         .hero {
-            background: linear-gradient(155deg, #091a28 0%, #0e2233 35%, #184058 100%);
+            background: linear-gradient(165deg, #071320 0%, #0b1d2c 30%, #153650 70%, #1a4060 100%);
             color: #fff;
             text-align: center;
-            padding: 100px 30px 90px;
+            padding: 160px 24px 110px;
             position: relative;
             overflow: hidden;
         }
- 
+
         .hero::before {
             content: '';
             position: absolute;
-            top: -40%;
+            top: -50%;
             left: -30%;
             width: 160%;
-            height: 180%;
-            background: radial-gradient(ellipse at 35% 45%, rgba(184,149,62,0.07) 0%, transparent 55%);
+            height: 200%;
+            background: radial-gradient(ellipse at 40% 40%, rgba(196,162,63,0.06) 0%, transparent 50%);
             pointer-events: none;
         }
- 
+
         .hero::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--cream));
+            pointer-events: none;
         }
- 
-        .hero-label {
-            font-family: 'Lora', serif;
-            font-size: 13px;
-            letter-spacing: 5px;
+
+        /* floating grid pattern */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(196,162,63,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(196,162,63,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 11.5px;
+            letter-spacing: 4.5px;
             text-transform: uppercase;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 22px;
-            display: block;
+            margin-bottom: 28px;
+            padding: 8px 20px;
+            border: 1px solid rgba(196,162,63,0.3);
+            border-radius: 40px;
+            background: rgba(196,162,63,0.06);
         }
- 
+
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 58px;
+            font-size: clamp(38px, 7vw, 64px);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            line-height: 1.08;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
         }
- 
-        .hero p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.6);
-            max-width: 540px;
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: rgba(255,255,255,0.5);
+            max-width: 480px;
             margin: 0 auto;
-            font-weight: 400;
+            font-weight: 300;
+            line-height: 1.8;
         }
- 
-        .gold-line {
-            width: 60px;
+
+        .hero-line {
+            width: 50px;
             height: 2px;
             background: var(--accent);
-            margin: 30px auto 0;
+            margin: 36px auto 0;
+            border-radius: 2px;
         }
- 
-        /* ── SECTIONS ── */
-        .section-wrapper {
-            max-width: 820px;
+
+        /* ═══════════════════════════════════
+           MAIN CONTAINER
+        ═══════════════════════════════════ */
+        .main-container {
+            max-width: var(--max-w);
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
- 
-        section { margin: 45px 0; }
- 
+
+        /* ═══════════════════════════════════
+           SECTION COMMON
+        ═══════════════════════════════════ */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section + .section {
+            border-top: 1px solid rgba(0,0,0,0.04);
+        }
+
         .card {
             background: var(--card);
             border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 10px;
-            padding: 55px 50px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03), 0 12px 40px rgba(0,0,0,0.04);
-            text-align: center;
+            border-radius: var(--radius);
+            padding: 56px 48px;
+            box-shadow: var(--shadow-md);
+            transition: box-shadow 0.4s;
         }
- 
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
         .section-label {
-            font-family: 'Lora', serif;
-            font-size: 12px;
-            letter-spacing: 3.5px;
+            font-size: 11px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: block;
         }
- 
+
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 34px;
+            font-size: clamp(28px, 4vw, 36px);
             font-weight: 700;
             color: var(--navy);
-            margin-bottom: 20px;
+            margin-bottom: 0;
+            line-height: 1.2;
         }
- 
-        .section-divider {
-            width: 45px;
+
+        .section-rule {
+            width: 40px;
             height: 2px;
             background: var(--accent);
-            margin: 0 auto 28px;
+            margin: 20px auto 0;
+            border-radius: 2px;
         }
- 
-        /* ── FOUNDERS ── */
+
+        /* ═══════════════════════════════════
+           FOUNDERS
+        ═══════════════════════════════════ */
         .founders-grid {
-            display: flex;
-            gap: 45px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 48px;
+            margin-top: 8px;
         }
- 
+
         .founder-card {
-            flex: 1;
-            min-width: 270px;
-            max-width: 330px;
+            text-align: center;
         }
- 
-        .founder-img-wrap {
-            width: 170px;
-            height: 170px;
+
+        .founder-avatar {
+            width: 152px;
+            height: 152px;
             border-radius: 50%;
-            margin: 0 auto 22px;
-            padding: 4px;
+            margin: 0 auto 24px;
+            padding: 3px;
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             position: relative;
         }
- 
-        .founder-img-wrap img {
+
+        .founder-avatar img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -216,152 +328,138 @@
             display: block;
             border: 3px solid var(--card);
         }
- 
+
         .founder-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 700;
             color: var(--navy);
             margin-bottom: 4px;
         }
- 
-        .founder-role {
-            font-size: 12px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
- 
-        .founder-bio {
-            font-size: 15px;
-            color: var(--text-mid);
-            line-height: 1.85;
-        }
- 
-        .linkedin-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 18px;
-            padding: 10px 24px;
-            background: var(--navy);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 12px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
- 
-        .linkedin-btn:hover {
-            background: var(--accent);
-            color: var(--navy);
-        }
- 
-        .linkedin-btn svg {
-            width: 15px;
-            height: 15px;
-            fill: currentColor;
-        }
- 
-        /* ── PHOTO INSTRUCTIONS ── */
-        .photo-note {
-            background: linear-gradient(135deg, #fdf8ec, #fef9f0);
-            border: 1px dashed var(--accent);
-            border-radius: 8px;
-            padding: 26px 32px;
-            margin-top: 35px;
-            text-align: left;
-            font-size: 14px;
-            color: var(--text-light);
-            line-height: 2;
-        }
- 
-        .photo-note strong {
-            color: var(--navy);
-            font-size: 15px;
-        }
- 
-        .photo-note code {
-            background: rgba(0,0,0,0.06);
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 13px;
-            font-family: monospace;
-        }
- 
-        /* ── LISTS ── */
-        .styled-list {
-            list-style: none;
-            padding: 0;
-            max-width: 520px;
-            margin: 0 auto;
-            text-align: left;
-        }
- 
-        .styled-list li {
-            padding: 13px 0 13px 30px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            font-size: 15px;
-            color: var(--text);
-            position: relative;
-        }
- 
-        .styled-list li:last-child { border-bottom: none; }
- 
-        .styled-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-        }
- 
-        /* ── SPLIT LIST ── */
-        .split-list {
-            display: flex;
-            gap: 0;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
- 
-        .split-list .col {
-            flex: 1;
-            padding: 0 24px;
-        }
- 
-        .split-list .col:first-child {
-            border-right: 1px solid rgba(0,0,0,0.06);
-        }
- 
-        .split-list .col-label {
-            font-family: 'Lora', serif;
+
+        .founder-title {
             font-size: 11px;
             letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
- 
-        .split-list li {
-            padding: 9px 0 9px 22px;
+
+        .founder-bio {
+            font-size: 14.5px;
+            color: var(--text-mid);
+            line-height: 1.85;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .btn-linkedin {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 10px 22px;
+            background: var(--navy);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 11.5px;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-linkedin:hover {
+            background: var(--accent);
+            color: var(--navy);
+            transform: translateY(-1px);
+        }
+
+        .btn-linkedin svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        /* ═══════════════════════════════════
+           MISSION / IMPACT (list style)
+        ═══════════════════════════════════ */
+        .feature-list {
+            list-style: none;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .feature-list li {
+            padding: 15px 0 15px 32px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             font-size: 15px;
             color: var(--text);
             position: relative;
+        }
+
+        .feature-list li:last-child { border-bottom: none; }
+
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: transparent;
+            transition: background 0.25s;
+        }
+
+        .feature-list li:hover::before {
+            background: var(--accent);
+        }
+
+        /* ═══════════════════════════════════
+           MODEL (split columns)
+        ═══════════════════════════════════ */
+        .model-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .model-col {
+            padding: 0 28px;
+        }
+
+        .model-col:first-child {
+            border-right: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .model-col-label {
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .model-col ul {
             list-style: none;
         }
- 
-        .split-list li::before {
+
+        .model-col li {
+            padding: 10px 0 10px 22px;
+            font-size: 14.5px;
+            color: var(--text);
+            position: relative;
+        }
+
+        .model-col li::before {
             content: '';
             position: absolute;
             left: 0;
@@ -372,236 +470,340 @@
             border-radius: 50%;
             background: var(--accent);
         }
- 
-        /* ── STAT ROW ── */
-        .stat-row {
+
+        /* ═══════════════════════════════════
+           STATS (crisis section)
+        ═══════════════════════════════════ */
+        .stats-row {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             justify-content: center;
-            margin: 30px 0 15px;
             flex-wrap: wrap;
+            margin-bottom: 28px;
         }
- 
-        .stat-box {
+
+        .stat-card {
             text-align: center;
-            padding: 24px 30px;
+            padding: 28px 36px;
             background: var(--warm);
-            border-radius: 10px;
+            border-radius: 12px;
             min-width: 200px;
+            flex: 1;
+            max-width: 280px;
+            transition: transform 0.25s;
         }
- 
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
+            font-size: 44px;
             font-weight: 800;
             color: var(--navy);
-            line-height: 1.2;
+            line-height: 1.15;
         }
- 
-        .stat-label {
-            font-size: 13px;
+
+        .stat-caption {
+            font-size: 12px;
             color: var(--text-light);
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-top: 5px;
+            margin-top: 6px;
+            font-weight: 500;
         }
- 
-        .crisis-text {
+
+        .crisis-desc {
             font-size: 15px;
             color: var(--text-mid);
-            margin-top: 22px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 480px;
+            margin: 0 auto 28px;
+            text-align: center;
+            line-height: 1.85;
         }
- 
-        /* ── NEWS LINK ── */
-        .news-link {
+
+        .btn-outline {
             display: inline-block;
-            margin-top: 22px;
             color: var(--navy);
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             text-decoration: none;
             border: 1px solid var(--navy);
-            padding: 11px 30px;
-            border-radius: 5px;
-            letter-spacing: 1.2px;
+            padding: 12px 32px;
+            border-radius: 8px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
         }
- 
-        .news-link:hover {
+
+        .btn-outline:hover {
             background: var(--navy);
             color: var(--accent);
+            transform: translateY(-1px);
         }
- 
-        /* ── CONTACT ── */
+
+        .text-center { text-align: center; }
+
+        /* ═══════════════════════════════════
+           CONTACT
+        ═══════════════════════════════════ */
         .contact-grid {
-            display: flex;
-            gap: 22px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 8px;
         }
- 
-        .contact-card {
+
+        .contact-item {
             background: var(--warm);
-            border-radius: 10px;
-            padding: 28px 32px;
+            border-radius: 12px;
+            padding: 30px 24px;
             text-align: center;
-            min-width: 210px;
-            flex: 1;
+            transition: transform 0.25s, box-shadow 0.25s;
         }
- 
-        .contact-card .c-icon { font-size: 24px; margin-bottom: 10px; }
- 
-        .contact-card h3 {
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-icon {
+            font-size: 26px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .contact-item h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--navy);
             margin-bottom: 6px;
         }
- 
-        .contact-card p {
-            font-size: 15px;
+
+        .contact-item p {
+            font-size: 14.5px;
             color: var(--text-mid);
         }
- 
-        .contact-card a {
+
+        .contact-item a {
             color: var(--navy);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.25s;
         }
- 
-        .contact-card a:hover { color: var(--accent); }
- 
-        /* ── FOOTER ── */
-        footer {
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* ═══════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════ */
+        .site-footer {
             background: var(--navy);
             color: rgba(255,255,255,0.35);
             text-align: center;
-            padding: 32px 20px;
+            padding: 36px 20px;
             font-size: 13px;
-            letter-spacing: 1px;
-            margin-top: 55px;
+            letter-spacing: 0.8px;
             border-top: 2px solid var(--accent);
         }
- 
-        footer span { color: var(--accent); }
- 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 650px) {
-            nav { flex-direction: column; padding: 12px 16px; gap: 8px; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
-            .nav-links a { padding: 10px 10px; font-size: 11px; }
-            .hero h1 { font-size: 36px; }
-            .hero { padding: 70px 20px 60px; }
-            .hero p { font-size: 16px; }
-            .card { padding: 40px 26px; }
-            .section-title { font-size: 26px; }
-            .founders-grid { flex-direction: column; align-items: center; }
-            .split-list { flex-direction: column; }
-            .split-list .col:first-child {
+
+        .site-footer span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════
+           ANIMATIONS
+        ═══════════════════════════════════ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* stagger children */
+        .stagger > *:nth-child(1) { transition-delay: 0s; }
+        .stagger > *:nth-child(2) { transition-delay: 0.12s; }
+        .stagger > *:nth-child(3) { transition-delay: 0.24s; }
+        .stagger > *:nth-child(4) { transition-delay: 0.36s; }
+
+        /* ═══════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════ */
+        @media (max-width: 768px) {
+            .navbar-inner { padding: 0 20px; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(11, 29, 44, 0.97);
+                padding: 16px 20px;
+                border-bottom: 1px solid rgba(196,162,63,0.2);
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links a {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+
+            .nav-toggle { display: block; }
+
+            .hero { padding: 130px 20px 90px; }
+
+            .section { padding: 56px 0; }
+
+            .card { padding: 40px 24px; }
+
+            .founders-grid { gap: 40px; }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .model-col:first-child {
                 border-right: none;
                 border-bottom: 1px solid rgba(0,0,0,0.06);
-                padding-bottom: 18px;
-                margin-bottom: 18px;
+                padding-bottom: 24px;
             }
-            .stat-row { flex-direction: column; align-items: center; }
-            .contact-grid { flex-direction: column; }
+
+            .model-col { padding: 0; }
+
+            .stats-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-card { max-width: 100%; width: 100%; }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 120px 16px 70px; }
+            .hero-desc { font-size: 15px; }
+            .card { padding: 32px 20px; }
+            .section-title { font-size: 26px; }
+            .founders-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
- 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-brand">SMF</div>
-        <div class="nav-links">
-            <a href="#founders">Founders</a>
-            <a href="#mission">Mission</a>
-            <a href="#how">Model</a>
-            <a href="#goal">Impact</a>
-            <a href="#why">Crisis</a>
-            <a href="#contact">Contact</a>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="nav-brand">SMF</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#founders">Founders</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#model">Model</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#crisis">Crisis</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </nav>
- 
-    <!-- Hero -->
-    <div class="hero">
-        <span class="hero-label">Est. 2025 &middot; Pakistan</span>
-        <h1>Student<br>Management Fund</h1>
-        <p>Empowering students through transparent financial management, skill-based revenue, and reinvestment in education.</p>
-        <div class="gold-line"></div>
-    </div>
- 
-    <div class="section-wrapper">
- 
-        <!-- Founders -->
-        <section id="founders">
-            <div class="card">
-                <span class="section-label">Leadership</span>
-                <h2 class="section-title">Our Founders</h2>
-                <div class="section-divider"></div>
- 
-                <div class="founders-grid">
-                    <div class="founder-card">
-                        <div class="founder-img-wrap">
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <header class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <span class="hero-badge">Est. 2025 &middot; Pakistan</span>
+            <h1>Student<br>Management <em>Fund</em></h1>
+            <p class="hero-desc">Empowering students through transparent financial management, skill-based revenue, and reinvestment in education.</p>
+            <div class="hero-line"></div>
+        </div>
+    </header>
+
+    <!-- ═══════════ MAIN ═══════════ -->
+    <main class="main-container">
+
+        <!-- ── FOUNDERS ── -->
+        <section class="section" id="founders">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">Leadership</span>
+                    <h2 class="section-title">Our Founders</h2>
+                    <div class="section-rule"></div>
+                </div>
+                <div class="founders-grid stagger">
+                    <div class="founder-card fade-up">
+                        <div class="founder-avatar">
                             <img src="JAMAL - SMF.jpg" alt="Jamal Nasir">
                         </div>
-                        <div class="founder-name">Jamal Nasir</div>
-                        <div class="founder-role">Founder</div>
-                        <p class="founder-bio">
-                            Trained at LUMS with a Master's in Financial Management. Bachelor's in Economics &amp; Mathematics from IBA Karachi. Currently at the Ministry of Finance, Pakistan. Founder of QuantOra.Generated 5000 Euros in revenue since the start of QuantOra
-                        </p>
-                        <a href="https://www.linkedin.com/in/jamal-nasir-5696b3222" target="_blank" class="linkedin-btn">
+                        <h3 class="founder-name">Jamal Nasir</h3>
+                        <p class="founder-title">Founder</p>
+                        <p class="founder-bio">Trained at LUMS in Financial Management and served as a Research Associate. Bachelor's in Economics &amp; Mathematics from IBA Karachi. Currently at the Ministry of Finance, Pakistan. Founder of QuantOra and generated 5000 Euros since its inception</p>
+                        <a href="https://www.linkedin.com/in/jamal-nasir-5696b3222" target="_blank" rel="noopener" class="btn-linkedin">
                             <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             LinkedIn
                         </a>
                     </div>
- 
-                    <div class="founder-card">
-                        <div class="founder-img-wrap">
+                    <div class="founder-card fade-up">
+                        <div class="founder-avatar">
                             <img src="noshaba.jpeg" alt="Noshaba Nasir">
                         </div>
-                        <div class="founder-name">Noshaba Nasir</div>
-                        <div class="founder-role">Co-Founder</div>
-                        <p class="founder-bio">
-                            Completed her studies in Development Sciences from IBA Karachi and aspiring Civil Servant. Actively involved in providing education to remote areas. Currently conducting field research on children's education in underserved communities.
-                        </p>
-                        <a href="https://www.linkedin.com/in/noshaba-nasir-557580279/" target="_blank" class="linkedin-btn">
+                        <h3 class="founder-name">Noshaba Nasir</h3>
+                        <p class="founder-title">Co-Founder</p>
+                        <p class="founder-bio">Graduate of Development Studies from IBA KARACHI. Actively involved in providing education to remote areas. Currently conducting field research on children's education in underserved communities.</p>
+                        <a href="https://www.linkedin.com/in/noshaba-nasir-557580279/" target="_blank" rel="noopener" class="btn-linkedin">
                             <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             LinkedIn
                         </a>
                     </div>
                 </div>
- 
-        <!-- Mission -->
-        <section id="mission">
-            <div class="card">
-                <span class="section-label">Purpose</span>
-                <h2 class="section-title">Our Mission</h2>
-                <div class="section-divider"></div>
-                <ul class="styled-list">
-                    <li>Provide services to students and professionals</li>
-                    <li>Generate revenue through skill-based work</li>
-                    <li>Build a sustainable student-focused fund</li>
-                    <li>Support education access in Pakistan</li>
+            </div>
+        </section>
+
+        <!-- ── MISSION ── -->
+        <section class="section" id="mission">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">Purpose</span>
+                    <h2 class="section-title">Our Mission</h2>
+                    <div class="section-rule"></div>
+                </div>
+                <ul class="feature-list stagger">
+                    <li class="fade-up">Provide services to students and professionals</li>
+                    <li class="fade-up">Generate revenue through skill-based work</li>
+                    <li class="fade-up">Build a sustainable student-focused fund</li>
+                    <li class="fade-up">Support education access in Pakistan</li>
                 </ul>
             </div>
         </section>
- 
-        <!-- How It Works -->
-        <section id="how">
-            <div class="card">
-                <span class="section-label">Business Model</span>
-                <h2 class="section-title">How It Works</h2>
-                <div class="section-divider"></div>
-                <div class="split-list">
-                    <div class="col">
-                        <div class="col-label">Revenue</div>
+
+        <!-- ── MODEL ── -->
+        <section class="section" id="model">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">Business Model</span>
+                    <h2 class="section-title">How It Works</h2>
+                    <div class="section-rule"></div>
+                </div>
+                <div class="model-grid">
+                    <div class="model-col">
+                        <p class="model-col-label">Revenue</p>
                         <ul>
                             <li>Services provided to clients</li>
                             <li>Revenue generated globally</li>
@@ -609,8 +811,8 @@
                             <li>30% allocated to fund</li>
                         </ul>
                     </div>
-                    <div class="col">
-                        <div class="col-label">Investment</div>
+                    <div class="model-col">
+                        <p class="model-col-label">Investment</p>
                         <ul>
                             <li>Fund invested in Pakistan markets</li>
                             <li>Includes stocks and bonds</li>
@@ -620,78 +822,114 @@
                 </div>
             </div>
         </section>
- 
-        <!-- Our Goal -->
-        <section id="goal">
-            <div class="card">
-                <span class="section-label">Impact</span>
-                <h2 class="section-title">Our Goal</h2>
-                <div class="section-divider"></div>
-                <ul class="styled-list">
-                    <li>Support female education in Pakistan</li>
-                    <li>Reduce education inequality</li>
-                    <li>Empower future generations</li>
-                    <li>Create long-term financial sustainability</li>
+
+        <!-- ── IMPACT / GOALS ── -->
+        <section class="section" id="impact">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">Impact</span>
+                    <h2 class="section-title">Our Goal</h2>
+                    <div class="section-rule"></div>
+                </div>
+                <ul class="feature-list stagger">
+                    <li class="fade-up">Support female education in Pakistan</li>
+                    <li class="fade-up">Reduce education inequality</li>
+                    <li class="fade-up">Empower future generations</li>
+                    <li class="fade-up">Create long-term financial sustainability</li>
                 </ul>
             </div>
         </section>
- 
-        <!-- Why This Matters -->
-        <section id="why">
-            <div class="card">
-                <span class="section-label">The Crisis</span>
-                <h2 class="section-title">Why This Matters</h2>
-                <div class="section-divider"></div>
-                <div class="stat-row">
-                    <div class="stat-box">
+
+        <!-- ── CRISIS ── -->
+        <section class="section" id="crisis">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">The Crisis</span>
+                    <h2 class="section-title">Why This Matters</h2>
+                    <div class="section-rule"></div>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-card">
                         <div class="stat-number">26.2M</div>
-                        <div class="stat-label">Children out of school</div>
+                        <p class="stat-caption">Children out of school</p>
                     </div>
-                    <div class="stat-box">
+                    <div class="stat-card">
                         <div class="stat-number">&#9792;</div>
-                        <div class="stat-label">Girls disproportionately affected</div>
+                        <p class="stat-caption">Girls disproportionately affected</p>
                     </div>
                 </div>
-                <p class="crisis-text">
-                    Access to education remains a major challenge across Pakistan. Millions of children — especially girls — are denied the opportunity to learn.
-                </p>
-                <a href="https://www.dawn.com/news/amp/1975945" target="_blank" class="news-link">Read Full Article &rarr;</a>
+                <p class="crisis-desc">Access to education remains a major challenge across Pakistan. Millions of children — especially girls — are denied the opportunity to learn.</p>
+                <div class="text-center">
+                    <a href="https://www.dawn.com/news/amp/1975945" target="_blank" rel="noopener" class="btn-outline">Read Full Article &rarr;</a>
+                </div>
             </div>
         </section>
- 
-        <!-- Contact -->
-        <section id="contact">
-            <div class="card">
-                <span class="section-label">Reach Out</span>
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="section-divider"></div>
+
+        <!-- ── CONTACT ── -->
+        <section class="section" id="contact">
+            <div class="card fade-up">
+                <div class="section-header">
+                    <span class="section-label">Reach Out</span>
+                    <h2 class="section-title">Get in Touch</h2>
+                    <div class="section-rule"></div>
+                </div>
                 <div class="contact-grid">
-                    <div class="contact-card">
-                        <div class="c-icon">&#9993;</div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#9993;</span>
                         <h3>Email</h3>
                         <p><a href="mailto:j.nasir25260@gmail.com">j.nasir25260@gmail.com</a></p>
                     </div>
-                    <div class="contact-card">
-                        <div class="c-icon">&#128205;</div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#128205;</span>
                         <h3>Location</h3>
                         <p>Karachi, Pakistan</p>
                     </div>
-                    <div class="contact-card">
-                        <div class="c-icon">&#128241;</div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#128241;</span>
                         <h3>Phone</h3>
                         <p><a href="tel:+923076217032">+92 307 6217032</a></p>
                     </div>
                 </div>
             </div>
         </section>
- 
-    </div>
- 
-    <!-- Footer -->
-    <footer>
+
+    </main>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="site-footer">
         &copy; 2025 <span>Student Management Fund</span>. All rights reserved.
     </footer>
- 
+
+    <!-- ═══════════ SCRIPTS ═══════════ -->
+    <script>
+        // ── Mobile nav toggle
+        const toggle = document.getElementById('navToggle');
+        const links = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+        // Close nav on link click (mobile)
+        links.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => links.classList.remove('open'));
+        });
+
+        // ── Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // ── Intersection Observer for fade-up animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+
 </body>
 </html>
- 
