@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuantOra — Open-source analytics, automation & learning support</title>
+  <meta name="description" content="QuantOra builds practical open-source analytical tools, business automations and learning support in mathematics, statistics and economics." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="network" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="QuantOra home">
+      <div class="brand-mark">Q</div>
+      <div>
+        <div class="brand-name">QuantOra</div>
+        <div class="brand-sub">Quantify. Build. Simplify.</div>
+      </div>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#services">Services</a>
+      <a href="#work">Tools</a>
+      <a href="#students">Students</a>
+      <a href="#reviews">Reviews</a>
+      <a class="nav-cta" href="#request">Request a solution</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main id="top">
+    <section class="hero section-pad">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="dot"></span> Open-source intelligence for real work</div>
+        <h1>Turn difficult work into <span>clear, useful systems.</span></h1>
+        <p class="hero-lede">QuantOra helps students understand mathematics, statistics and economics — and helps growing businesses build analytical tools, automations and decision systems without being trapped by expensive monthly software.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#request">Tell me what you need <span>↗</span></a>
+          <a class="btn btn-ghost" href="#work">See what I build</a>
+        </div>
+        <div class="proof-strip">
+          <div><strong>Open-source first</strong><span>Own your workflow</span></div>
+          <div><strong>Built for clarity</strong><span>Not technical theatre</span></div>
+          <div><strong>Practical delivery</strong><span>From problem to usable tool</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal delay-1">
+        <div class="orbital-wrap">
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="orbit orbit-c"></div>
+          <div class="logo-core"><span class="hero-q" aria-label="QuantOra Q logo">Q</span></div>
+          <div class="floating-card fc-one"><small>Business</small><strong>Automation</strong><span>Recurring work → one click</span></div>
+          <div class="floating-card fc-two"><small>Analytics</small><strong>Decision Tools</strong><span>Data → understandable action</span></div>
+          <div class="floating-card fc-three"><small>Learning</small><strong>Math • Stats • Econ</strong><span>Understand, don't memorize</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto section-pad">
+      <div class="manifesto-line reveal">Software should make a business <em>more capable</em>, not more dependent.</div>
+      <div class="manifesto-grid">
+        <div class="manifesto-number reveal"><span>01</span><h3>No subscription trap</h3><p>Where practical, I build with open-source components so the core value sits with you, not behind a recurring license.</p></div>
+        <div class="manifesto-number reveal"><span>02</span><h3>No black-box complexity</h3><p>Dashboards, models and automations should make the answer easier to see, explain and act on.</p></div>
+        <div class="manifesto-number reveal"><span>03</span><h3>No generic template</h3><p>The goal is not to sell software. The goal is to understand your bottleneck and build the smallest useful system around it.</p></div>
+      </div>
+    </section>
+
+    <section id="services" class="section-pad services-section">
+      <div class="section-head reveal">
+        <div><span class="kicker">SERVICES</span><h2>Two audiences. One philosophy: make hard things usable.</h2></div>
+        <p>QuantOra sits between analysis and implementation — translating messy questions into understandable, maintainable tools.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card reveal"><div class="service-icon">∑</div><div class="service-num">01</div><h3>Student Learning Support</h3><p>Mathematics, statistics and economics explained from first principles with worked examples, visual intuition and practical applications.</p><ul><li>Concept tutoring</li><li>Assignments & problem solving guidance</li><li>Statistics / econometrics support</li><li>Research calculations & interpretation</li></ul><a href="#request">Request learning support →</a></article>
+        <article class="service-card featured reveal delay-1"><div class="service-icon">⌘</div><div class="service-num">02</div><h3>Business Automation</h3><p>Replace repetitive spreadsheets, manual checking and copy-paste workflows with simple systems your team can actually use.</p><ul><li>Workflow automation</li><li>Internal calculators & utilities</li><li>Document / data processing</li><li>Open-source operational apps</li></ul><a href="#request">Show me the repetitive task →</a></article>
+        <article class="service-card reveal delay-2"><div class="service-icon">◫</div><div class="service-num">03</div><h3>Analytics & Decision Tools</h3><p>Custom dashboards, forecasting models and analytical interfaces designed around the decision — not just the data.</p><ul><li>Management dashboards</li><li>Forecasting & scenario tools</li><li>Financial / economic models</li><li>Data quality & reporting pipelines</li></ul><a href="#request">Describe the decision problem →</a></article>
+        <article class="service-card reveal"><div class="service-icon">AI</div><div class="service-num">04</div><h3>Open-source AI Utilities</h3><p>Practical AI-assisted tools where open models and local processing make sense — built to reduce recurring usage cost and unnecessary limits.</p><ul><li>Transcription & translation workflows</li><li>Document extraction</li><li>Knowledge search</li><li>Task-specific assistants</li></ul><a href="#work">See current tools →</a></article>
+      </div>
+    </section>
+
+    <section id="work" class="section-pad work-section">
+      <div class="section-head reveal"><div><span class="kicker">BUILD LAB</span><h2>Not mockups. Working tools.</h2></div><p>Every tool is a demonstration of the larger idea: useful software can be focused, understandable and affordable.</p></div>
+      <div class="project-row reveal"><div class="project-index">01</div><div><span class="project-tag">Speech • Research • Open source</span><h3>Long-form Transcription Workspace</h3><p>Built to process large interview recordings, mixed Urdu/English speech and long-form research audio using open-source speech models.</p></div><div class="project-actions"><a class="live-link" href="https://transcriber-by-jami.streamlit.app/" target="_blank" rel="noreferrer">Open live tool ↗</a><a class="code-link" href="https://github.com/jamal715/free-whisper-transcriber" target="_blank" rel="noreferrer">Source</a></div></div>
+      <div class="project-row reveal"><div class="project-index">02</div><div><span class="project-tag">Trade • Data • Analytics</span><h3>Pakistan Export Intelligence</h3><p>A data pipeline and analytical dashboard concept for identifying exporters, market concentration, exporter rankings and commercial intelligence.</p></div><div class="project-actions"><a class="live-link" href="https://pakistan-non-rice-food-export-intelligence-ncgcl.streamlit.app/" target="_blank" rel="noreferrer">Open live dashboard ↗</a><a class="code-link" href="https://github.com/jamal715/Pakistan--Food-Non-Rice-Export-Data-Deep-Dive" target="_blank" rel="noreferrer">Source</a></div></div>
+      <div class="project-row reveal"><div class="project-index">03</div><div><span class="project-tag">Finance • Screening • Modelling</span><h3>Quantitative Screening Tools</h3><p>Research-driven financial utilities that turn raw market information into structured signals and readable decision support.</p></div><span class="status-pill">In development</span></div>
+    </section>
+
+    <section id="students" class="students-section section-pad"><div class="student-panel reveal"><div class="kicker">FOR STUDENTS</div><h2>You do not need another answer sheet. You need the idea to click.</h2><p>I focus on the reasoning beneath formulas: why a method works, what assumptions matter, how to interpret the output, and how the concept connects to the real world.</p><div class="subject-chips"><span>Mathematics</span><span>Statistics</span><span>Econometrics</span><span>Economics</span><span>Data Analysis</span><span>Research Methods</span></div><a class="btn btn-light" href="#request">Bring your question</a></div></section>
+
+    <section id="reviews" class="section-pad reviews-section">
+      <div class="section-head reveal"><div><span class="kicker">CLIENT VOICES</span><h2>Proof should come from people, not adjectives.</h2></div><p>Client reviews will be shown with the reviewer’s name and, where permission is given, company/location. Nothing fabricated, nothing anonymous by default.</p></div>
+      <div class="review-layout">
+        <div class="review-placeholder reveal"><div class="quote-mark">“</div><h3>Verified client reviews are being added.</h3><p>Approved client testimonials will appear here with the reviewer’s selected avatar, name, star rating and review.</p><div class="review-note">Authenticity over filler.</div></div>
+        <form id="reviewForm" class="review-form reveal delay-1"><h3>Worked with QuantOra?</h3><p>Leave a review. Submissions are moderated before publishing.</p><div class="stars" id="stars" aria-label="Rating"><button type="button" data-value="1">★</button><button type="button" data-value="2">★</button><button type="button" data-value="3">★</button><button type="button" data-value="4">★</button><button type="button" data-value="5">★</button></div><input type="hidden" id="rating" value="5" /><div class="field-row"><input id="reviewName" required placeholder="Your name" /><input id="reviewOrg" placeholder="Company / institution (optional)" /></div><div class="avatar-label">Choose an avatar</div><div class="avatar-picker" id="avatarPicker" role="radiogroup" aria-label="Choose a profile avatar"><label class="avatar-option selected"><input type="radio" name="avatar" value="ocean" checked><span class="avatar ocean"><i></i></span><small>Ocean</small></label><label class="avatar-option"><input type="radio" name="avatar" value="slate"><span class="avatar slate"><i></i></span><small>Slate</small></label><label class="avatar-option"><input type="radio" name="avatar" value="aqua"><span class="avatar aqua"><i></i></span><small>Aqua</small></label><label class="avatar-option"><input type="radio" name="avatar" value="ink"><span class="avatar ink"><i></i></span><small>Ink</small></label><label class="avatar-option"><input type="radio" name="avatar" value="mist"><span class="avatar mist"><i></i></span><small>Mist</small></label><label class="avatar-option"><input type="radio" name="avatar" value="steel"><span class="avatar steel"><i></i></span><small>Steel</small></label></div><textarea id="reviewText" required rows="5" maxlength="700" placeholder="Write a few sentences about your experience with QuantOra."></textarea><label class="review-consent"><input id="reviewConsent" type="checkbox" required> I am happy for my name, rating, selected avatar and review to be displayed publicly after approval.</label><button class="btn btn-primary" type="submit">Submit review for approval</button><small>Your review will not appear instantly. QuantOra checks submissions before publishing them to protect the site from spam and misuse.</small></form>
+      </div>
+    </section>
+
+    <section id="request" class="request-section section-pad">
+      <div class="request-copy reveal"><span class="kicker">START WITH THE PROBLEM</span><h2>“Here is what takes too much time. Can you make it easier?”</h2><p>That is enough to start. You do not need to know the technology, model or architecture. Describe the work, the pain point and what a useful outcome would look like.</p><div class="contact-stack"><a href="mailto:j.nasir25260@gmail.com"><span>Email</span>j.nasir25260@gmail.com</a><a href="tel:+923076217032"><span>Call / WhatsApp</span>+92 307 621 7032</a><a href="https://www.linkedin.com/company/quantora07" target="_blank" rel="noreferrer"><span>LinkedIn</span>QuantOra ↗</a></div></div>
+      <form id="requestForm" class="request-form reveal delay-1"><div class="field-row"><input id="name" required placeholder="Your name" /><input id="email" required type="email" placeholder="Email" /></div><select id="need" required><option value="">What do you need help with?</option><option>Business automation</option><option>Analytics / dashboard</option><option>Open-source AI tool</option><option>Mathematics / Statistics / Economics</option><option>Research / data analysis</option><option>Something else</option></select><textarea id="problem" required rows="6" placeholder="Describe the problem in plain language. What are you doing now, and what would you like to make easier?"></textarea><div class="field-row"><input id="budget" placeholder="Budget range (optional)" /><input id="timeline" placeholder="Timeline (optional)" /></div><button class="btn btn-primary" type="submit">Send project request <span>↗</span></button><small>Preview mode: opens your email client with the request pre-filled.</small></form>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#top"><div class="brand-mark">Q</div><div><div class="brand-name">QuantOra</div><div class="brand-sub">Data-driven solutions for economic insight</div></div></a><p>Built around open-source tools, clear reasoning and useful outcomes.</p><div class="footer-links"><a href="#services">Services</a><a href="#work">Tools</a><a href="#reviews">Reviews</a><a href="https://www.linkedin.com/company/quantora07" target="_blank" rel="noreferrer">LinkedIn ↗</a></div><div class="copyright">© <span id="year"></span> QuantOra. All rights reserved.</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
