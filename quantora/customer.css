@@ -1,0 +1,60 @@
+/* Customer-facing refinement layer */
+.hero-lede{max-width:650px}
+.manifesto{padding-top:82px;padding-bottom:82px}
+.manifesto-line{max-width:900px;margin-bottom:48px}
+.manifesto-number h3{margin:24px 0 9px}
+.manifesto-number p{max-width:330px;margin-bottom:0}
+.section-head{margin-bottom:42px}
+.section-head p{max-width:520px}
+.service-card{min-height:365px;padding:32px}
+.service-card h3{margin:26px 0 10px}
+.service-card ul{margin:18px 0 24px}
+.project-row{padding:28px 0}
+.students-section .student-panel{max-width:900px}
+.review-placeholder,.review-form,.request-form{border-radius:28px}
+.review-form p{margin-top:0}
+
+.request-section{grid-template-columns:.78fr 1.22fr;gap:72px;align-items:center;background:linear-gradient(135deg,#eef4f6,#f8fafb)}
+.request-copy{max-width:520px}
+.request-copy h2{max-width:500px}
+.request-copy p{max-width:480px;margin:18px 0 0;font-size:17px;line-height:1.65}
+.contact-icons{display:flex;gap:12px;margin-top:30px;align-items:center}
+.contact-icon{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--teal);border:1px solid rgba(7,21,29,.09);box-shadow:0 12px 30px rgba(7,21,29,.07);transition:transform .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease}
+.contact-icon svg{width:23px;height:23px;fill:currentColor}
+.contact-icon.linkedin-icon span{font:800 22px/1 Arial,sans-serif;letter-spacing:-.04em}
+.contact-icon:hover{transform:translateY(-3px);background:var(--teal);color:#fff;box-shadow:0 16px 38px rgba(0,77,115,.18)}
+.contact-icon:focus-visible{outline:3px solid rgba(25,183,210,.35);outline-offset:3px}
+
+.request-form{padding:30px;box-shadow:0 24px 70px rgba(7,21,29,.08)}
+.request-form input,.request-form select,.request-form textarea{background:#fff;border-color:#d7e0e4;border-radius:15px;padding:16px 18px;margin-bottom:12px}
+.request-form input,.request-form select{min-height:56px}
+.request-form textarea{min-height:170px;line-height:1.5}
+.request-form .btn{margin-top:2px;min-width:178px}
+.request-form button:disabled,.review-form button:disabled{opacity:.65;cursor:wait;transform:none}
+.form-status{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:700;line-height:1.45}
+.form-status.success{color:#0a6657;background:#e8f7f2;border:1px solid #cdece4}
+.form-status.error{color:#a23131;background:#fff0f0;border:1px solid #f2d1d1}
+
+.approved-reviews{display:grid;gap:14px}
+.approved-review{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.review-head{display:flex;align-items:center;gap:12px}
+.review-head .avatar{width:42px;height:42px;flex:0 0 auto}
+.review-head .avatar i:before{left:12px;top:7px}
+.review-head .avatar i:after{left:7.5px;top:22px}
+.review-head strong,.review-head small{display:block}
+.review-head small{color:var(--muted);margin-top:3px}
+.review-stars{color:#f3b622;letter-spacing:2px;margin:12px 0 8px}
+.approved-review p{margin:0;color:#53636b;line-height:1.6}
+
+@media(max-width:1000px){
+  .request-section{grid-template-columns:1fr;gap:34px;align-items:start}
+  .request-copy{max-width:720px}
+}
+@media(max-width:620px){
+  .manifesto{padding-top:64px;padding-bottom:64px}
+  .service-card{min-height:0}
+  .request-form{padding:22px}
+  .contact-icons{margin-top:22px}
+  .contact-icon{width:52px;height:52px;border-radius:15px}
+  .request-form .btn{width:100%}
+}
