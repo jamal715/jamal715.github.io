@@ -1,3 +1,8 @@
+const customerStyles=document.createElement('link');
+customerStyles.rel='stylesheet';
+customerStyles.href='customer.css';
+document.head.appendChild(customerStyles);
+
 const SUPABASE_URL='https://bkbzrrvjpogtrhlkixll.supabase.co';
 const SUPABASE_KEY='sb_publishable_HIOdjN7r7wL9WABzHjBWnQ_PMQH0HM-';
 const CONTACT_EMAIL='j.nasir25260@gmail.com';
