@@ -18,12 +18,15 @@
 .request-copy{max-width:520px}
 .request-copy h2{max-width:500px}
 .request-copy p{max-width:480px;margin:18px 0 0;font-size:17px;line-height:1.65}
-.contact-icons{display:flex;gap:12px;margin-top:30px;align-items:center}
-.contact-icon{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--teal);border:1px solid rgba(7,21,29,.09);box-shadow:0 12px 30px rgba(7,21,29,.07);transition:transform .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease}
-.contact-icon svg{width:23px;height:23px;fill:currentColor}
-.contact-icon.linkedin-icon span{font:800 22px/1 Arial,sans-serif;letter-spacing:-.04em}
-.contact-icon:hover{transform:translateY(-3px);background:var(--teal);color:#fff;box-shadow:0 16px 38px rgba(0,77,115,.18)}
-.contact-icon:focus-visible{outline:3px solid rgba(25,183,210,.35);outline-offset:3px}
+
+/* compact contact capsule */
+.contact-icons{display:inline-flex!important;align-items:center!important;gap:8px!important;width:auto!important;max-width:max-content!important;margin-top:24px!important;padding:7px 8px 7px 14px!important;background:#fff!important;border:1px solid rgba(7,21,29,.09)!important;border-radius:999px!important;box-shadow:0 12px 30px rgba(7,21,29,.07)!important}
+.contact-icons::before{content:"Contact here";display:block;font:700 12px/1 Inter,system-ui,sans-serif;color:#53636b;white-space:nowrap;margin-right:3px}
+.contact-icon{box-sizing:border-box!important;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;max-width:36px!important;max-height:36px!important;flex:0 0 36px!important;padding:0!important;margin:0!important;border-radius:50%!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:#f5f9fa!important;color:var(--teal)!important;border:1px solid rgba(0,77,115,.10)!important;box-shadow:none!important;transition:transform .18s ease,background .18s ease,color .18s ease!important}
+.contact-icon svg{display:block!important;position:static!important;width:17px!important;height:17px!important;min-width:17px!important;min-height:17px!important;max-width:17px!important;max-height:17px!important;fill:currentColor!important;margin:0!important;padding:0!important}
+.contact-icon.linkedin-icon span{display:block!important;font:800 16px/1 Arial,sans-serif!important;letter-spacing:-.04em!important}
+.contact-icon:hover{transform:translateY(-2px)!important;background:var(--teal)!important;color:#fff!important}
+.contact-icon:focus-visible{outline:3px solid rgba(25,183,210,.35)!important;outline-offset:2px!important}
 
 .request-form{padding:30px;box-shadow:0 24px 70px rgba(7,21,29,.08)}
 .request-form input,.request-form select,.request-form textarea{background:#fff;border-color:#d7e0e4;border-radius:15px;padding:16px 18px;margin-bottom:12px}
@@ -54,7 +57,9 @@
   .manifesto{padding-top:64px;padding-bottom:64px}
   .service-card{min-height:0}
   .request-form{padding:22px}
-  .contact-icons{margin-top:22px}
-  .contact-icon{width:52px;height:52px;border-radius:15px}
+  .contact-icons{margin-top:20px!important;padding-left:12px!important}
+  .contact-icons::before{font-size:11px}
+  .contact-icon{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;max-width:34px!important;max-height:34px!important;flex-basis:34px!important}
+  .contact-icon svg{width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;max-width:16px!important;max-height:16px!important}
   .request-form .btn{width:100%}
 }
