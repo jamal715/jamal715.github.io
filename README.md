@@ -1,33 +1,44 @@
-# Jamal Nasir — personal portfolio
+# Jamal Nasir — portfolio
 
-Live: https://jamal715.github.io/
+Live website: https://jamal715.github.io/
 
-A plain HTML and CSS website. No framework, JavaScript, subscription or build step is needed to edit the website.
+## Make changes without editing HTML
 
-## Edit your page on GitHub
+Open **https://jamal715.github.io/edit/**.
 
-1. Open `index.html` and select the pencil (Edit).
-2. Find an `EDIT:` comment for the section you want to update.
-3. Change the text between the HTML tags. Change a link inside its `href="..."`.
-4. Select **Commit changes** and commit to `main`. GitHub Pages publishes the change.
+1. Edit text, experience, projects and links in the form. Add or remove entries as needed.
+2. Select **Preview changes**. Choose Desktop or Mobile to inspect the layout.
+3. Select **Download profile.json**.
+4. Select **Upload to GitHub**, upload the downloaded `profile.json`, and commit to `main`.
 
-Keep the HTML tags in place. Write `&amp;` when you need an ampersand. You can use GitHub's History view to review or restore earlier versions.
+Changes become live after GitHub Pages publishes. The editor saves drafts in your browser; it cannot publish by itself. Only a GitHub account with repository access can commit changes. Visitors cannot edit your live profile through the editor.
+
+## Replace the downloadable CV
+
+The download uses the exact originally supplied PDF, without rewriting or reformatting it.
+
+In the editor, expand **Replace your photo or downloadable CV**. Choose a PDF and download its renamed copy, `Jamal-Nasir-CV.pdf`. Use **Upload files to assets**, upload it and commit. The website's CV links keep working because the filename stays the same. This process preserves the PDF bytes.
+
+## Replace your photo
+
+Use the same panel to choose a JPG or PNG and download its renamed copy. Upload it into `assets` and commit. JPG uses `assets/profile.jpg`. For PNG, also download/upload `profile.json`, since the photo path changes to `assets/profile.png`.
+
+The current photo comes from the existing repository. The display crop is controlled by `.portrait img` in `styles.css`.
 
 ## Files
 
-- `index.html`: all portfolio copy, experience, dates and links.
-- `styles.css`: typography, colours, spacing and mobile layout. Colours are at the top.
-- `assets/Jamal-Nasir-CV.pdf`: downloadable updated CV.
-- `cv_source.py`: editable CV source. Change the text, run `python cv_source.py` with ReportLab installed, and commit source and PDF. Alternatively replace the PDF with your own using the same filename.
-- `smf/index.html`: preserved Student Management Fund website, using the original photos at the repository root.
-- `quantora/`: existing QuantOra pages, preserved in place.
+- `profile.json`: all personal text, roles, project details and links.
+- `styles.css`: design, spacing and responsive layout.
+- `renderer.js`: shared rendering of profile content.
+- `app.js`: loads the latest profile data.
+- `index.html`: page shell and static fallback.
+- `edit/`: browser-based editing and preview tools. No tokens or passwords are stored.
+- `assets/Jamal-Nasir-CV.pdf`: replaceable CV.
+- `assets/profile.jpg`: replaceable portrait.
+- `build.cjs`: optional `node build.cjs` command to refresh the static HTML fallback after content edits. Normal live edits to `profile.json` do not require a build.
 
-The homepage links to the existing Research & Analysis website; research articles remain editable there.
+The previous fund page and QuantOra directory are retained at their existing paths, but the fund is no longer linked or mentioned in the profile.
 
-## Local preview
+## Preview locally
 
-Run `python -m http.server 8000` in this folder, then open http://localhost:8000.
-
-## Content notes
-
-The attached CV supplies professional and academic information. EY title, reporting line and October 2026 start date follow the owner's supplied updates. ISMO work is described as research and simulation, without treating historical outcomes as forecasts. No private repository has been made public.
+Run `python -m http.server 8000` and open http://localhost:8000.
