@@ -1,10 +1,15 @@
 /* Shared renderer. All personal content lives in profile.json. */
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function safeURL(v){const s=String(v||'');return /^(https?:\/\/|mailto:|assets\/|#)/i.test(s)?esc(s):'#';}
+function photoStyle(d){
+ const c=d.photoCrop||{zoom:2.05,x:53,y:43,fit:'cover'};
+ const n=(v,lo,hi,fallback)=>Number.isFinite(Number(v))?Math.max(lo,Math.min(hi,Number(v))):fallback;
+ return `--photo-zoom:${n(c.zoom,1,3,1)};--photo-x:${n(c.x,0,100,50)}%;--photo-y:${n(c.y,0,100,50)}%;--photo-fit:${c.fit==='contain'?'contain':'cover'}`;
+}
 function renderProfile(d){
  const a=(url,label,cls='')=>`<a class="${cls}" href="${safeURL(url)}">${esc(label)}</a>`;
  const heading=(n,title,desc='')=>`<div class="section-label"><span>${n}</span><h2>${title}</h2>${desc?`<p>${desc}</p>`:''}</div>`;
- return `<section class="identity" aria-labelledby="name"><div class="identity-copy"><div class="kicker">Research · Models · Practice</div><h1 id="name">${esc(d.name)}</h1><p class="headline">${esc(d.headline)}</p><p class="intro">${esc(d.intro)}</p><p class="current">${esc(d.current)}</p><div class="linkline">${a(d.cv,'Download CV','download')}${a(d.research,'Research ↗')}${a(d.github,'GitHub ↗')}${a(d.linkedin,'LinkedIn ↗')}</div></div><figure class="portrait"><img src="${safeURL(d.photo)}" alt="Portrait" width="174" height="205"></figure></section>
+ return `<section class="identity" aria-labelledby="name"><div class="identity-copy"><div class="kicker">Research · Models · Practice</div><h1 id="name">${esc(d.name)}</h1><p class="headline">${esc(d.headline)}</p><p class="intro">${esc(d.intro)}</p><p class="current">${esc(d.current)}</p><div class="linkline">${a(d.cv,'Download CV','download')}${a(d.research,'Research ↗')}${a(d.github,'GitHub ↗')}${a(d.linkedin,'LinkedIn ↗')}</div></div><figure class="portrait" style="${photoStyle(d)}"><img src="${safeURL(d.photo)}" alt="Portrait" width="174" height="205"></figure></section>
  <div class="evidence">${d.highlights.map(x=>`<span>${esc(x)}</span>`).join('')}</div>
  <section class="section" id="experience">${heading('01','Experience')}<div class="section-body">${d.experience.map(x=>`<article class="role"><div class="role-top"><h3>${esc(x.role)}</h3><span class="date">${esc(x.dates)}</span></div><p class="organization">${esc(x.organization)}</p><p class="fields">${esc(x.fields)}</p><ul>${x.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></article>`).join('')}</div></section>
  <section class="section" id="work">${heading('02','Selected work','Across subjects.<br>Grounded in problems.')}<div class="section-body projects">${d.projects.map(x=>`<article class="project"><div class="kicker">${esc(x.category)}</div><h3>${esc(x.title)}</h3><p>${esc(x.description)}</p><div class="project-bottom"><span>${esc(x.methods)}</span><span class="status">${esc(x.status)}</span></div>${x.links.length?`<div class="linkline">${x.links.map(l=>a(l.url,l.label+' ↗')).join('')}</div>`:''}</article>`).join('')}</div></section>

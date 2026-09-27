@@ -6,12 +6,15 @@ Live website: https://jamal715.github.io/
 
 Open **https://jamal715.github.io/edit/**.
 
-1. Edit text, experience, projects and links in the form. Add, remove or reorder entries as needed. Undo restores the last edit in the current session.
-2. Select **Preview changes**. Choose Desktop or Mobile to inspect the layout. The preview updates as you edit.
-3. Select **Download profile.json**.
-4. Select **Upload to GitHub**, upload the downloaded `profile.json`, and commit to `main`.
+1. Edit your text, experience, projects and links. Add, remove or reorder entries; use Undo to restore an edit.
+2. Expand the photo/CV panel to select files. Use Zoom, Horizontal position, Vertical position, and Fit to frame your portrait. New photos start at 1× zoom.
+3. Select Preview changes and check desktop/mobile layouts.
+4. Expand Connect GitHub to publish. Create a fine-grained token for **only jamal715.github.io**, with **Contents: Read and write**, and an expiry date. Enter it in the editor, never in chat. It is kept only in the current page's memory, sent only to api.github.com, and cleared on reload/disconnect.
+5. Select **Publish to website**. This uploads the text, photo framing, original photo/CV bytes, and static page snapshot in one commit. Wait for **Live** before expecting the public page to match. GitHub Pages deployment normally takes a short time.
 
-Changes become live after GitHub Pages publishes. You can import a downloaded profile.json to resume editing. Text and selected file drafts survive a reload in the same browser; clearing browser data removes them. The editor saves drafts in your browser; it cannot publish by itself. Only a GitHub account with repository access can commit changes. Visitors cannot edit your live profile through the editor.
+Publication checks for newer profile edits and refuses to overwrite them. New asset filenames are content-based to avoid stale browser caches. Drafts are kept locally on failure. A browser draft is never shown to public visitors as if it were published.
+
+Import/export and manual GitHub upload remain available as a backup. Text and selected file drafts survive reloads in the same browser; clearing browser data removes them. Only a GitHub account with write access can publish.
 
 ## Replace the downloadable CV
 

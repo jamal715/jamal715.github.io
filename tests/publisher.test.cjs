@@ -1,0 +1,27 @@
+const assert=require('node:assert/strict');
+const {publish}=require('../edit/publisher.js');
+const {renderProfile}=require('../renderer.js');
+const baseline=require('../profile.json');
+function fake(conflict=false,refFailure=false){const calls=[];const fetcher=async(url,opts)=>{const path=url.split('/jamal715.github.io')[1];const body=opts.body&&JSON.parse(opts.body);calls.push({path,method:opts.method,body});let data={};let code=200;
+if(path==='/git/ref/heads/main')data={object:{sha:'head'}};
+else if(path==='/git/commits/head')data={tree:{sha:'oldtree'}};
+else if(path.startsWith('/contents/profile.json'))data={content:Buffer.from(JSON.stringify(conflict?{...baseline,name:'Concurrent edit'}:baseline)).toString('base64')};
+else if(path.startsWith('/contents/index.html'))data={content:Buffer.from('<main><!-- PROFILE START -->old<!-- PROFILE END --></main>').toString('base64')};
+else if(path==='/git/blobs')data={sha:'asset'};
+else if(path==='/git/trees')data={sha:'newtree'};
+else if(path==='/git/commits')data={sha:'newcommit'};
+else if(path==='/git/refs/heads/main'&&refFailure)code=422;
+return {ok:code===200,status:code,json:async()=>data};};return {calls,fetcher};}
+(async()=>{
+const updated={...baseline,headline:'Research — €7,000 and beyond',photoCrop:{zoom:1.25,x:30,y:65,fit:'contain'}};
+const f=fake();const result=await publish({token:'test-only',profile:updated,baseline,assets:{photo:{path:baseline.photo,file:new Blob(['test image bytes'])}},render:renderProfile,fetcher:f.fetcher});
+assert.equal(result.commit,'newcommit');assert.match(result.profile.photo,/assets\/profile-[a-f0-9]{16}\.jpg/);
+const tree=f.calls.find(x=>x.path==='/git/trees').body.tree;
+assert.equal(tree.length,3);assert.equal(JSON.parse(tree.find(x=>x.path==='profile.json').content).headline,updated.headline);
+assert.match(tree.find(x=>x.path==='index.html').content,/--photo-zoom:1.25/);
+assert.equal(f.calls.at(-1).body.force,false);assert.equal(f.calls.at(-1).path,'/git/refs/heads/main');
+const c=fake(true);await assert.rejects(()=>publish({token:'test-only',profile:updated,baseline,assets:{},render:renderProfile,fetcher:c.fetcher}),/published profile has changed/);assert.equal(c.calls.filter(x=>x.method!=='GET').length,0);
+const failure=fake(false,true);await assert.rejects(()=>publish({token:'test-only',profile:updated,baseline,assets:{},render:renderProfile,fetcher:failure.fetcher}),/could not accept/);
+assert.match(renderProfile({...baseline,photoCrop:{zoom:999,x:-9,y:200,fit:'invalid'}}),/--photo-zoom:3;--photo-x:0%;--photo-y:100%;--photo-fit:cover/);
+console.log('PASS: atomic publication, Unicode, original asset bytes, refreshed HTML, crop bounds, conflict protection and failed update handling.');
+})();
