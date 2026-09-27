@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {publish}=require('../edit/publisher.js');
+const {publish,verifyWriteAccess,client}=require('../edit/publisher.js');
 const {renderProfile}=require('../renderer.js');
 const baseline=require('../profile.json');
 function fake(conflict=false,refFailure=false){const calls=[];const fetcher=async(url,opts)=>{const path=url.split('/jamal715.github.io')[1];const body=opts.body&&JSON.parse(opts.body);calls.push({path,method:opts.method,body});let data={};let code=200;
@@ -23,5 +23,10 @@ assert.equal(f.calls.at(-1).body.force,false);assert.equal(f.calls.at(-1).path,'
 const c=fake(true);await assert.rejects(()=>publish({token:'test-only',profile:updated,baseline,assets:{},render:renderProfile,fetcher:c.fetcher}),/published profile has changed/);assert.equal(c.calls.filter(x=>x.method!=='GET').length,0);
 const failure=fake(false,true);await assert.rejects(()=>publish({token:'test-only',profile:updated,baseline,assets:{},render:renderProfile,fetcher:failure.fetcher}),/could not accept/);
 assert.match(renderProfile({...baseline,photoCrop:{zoom:999,x:-9,y:200,fit:'invalid'}}),/--photo-zoom:3;--photo-x:0%;--photo-y:100%;--photo-fit:cover/);
+const denied=[];
+await assert.rejects(()=>verifyWriteAccess('test-only',async(url,opts)=>{denied.push(opts.method);return opts.method==='GET'?{ok:true,status:200,json:async()=>({object:{sha:'head'}})}:{ok:false,status:403,headers:{get:()=>null},json:async()=>({message:'Resource not accessible by personal access token'})};}),/GitHub 403 at POST \/git\/blobs: Resource not accessible/);
+assert.deepEqual(denied,['GET','POST']);
+await assert.rejects(()=>client('test-only',async()=>({ok:false,status:403,headers:{get:n=>n==='x-ratelimit-remaining'?'0':null},json:async()=>({message:'API rate limit exceeded'})}))('/git/blobs','POST',{}),/rate-limited requests/);
+await assert.rejects(()=>client('test-only',async()=>({ok:false,status:401,headers:{get:()=>null},json:async()=>({message:'Invalid test-only'})}))('/git/ref/heads/main'),e=>!e.message.includes('test-only')&&e.message.includes('[redacted]'));
 console.log('PASS: atomic publication, Unicode, original asset bytes, refreshed HTML, crop bounds, conflict protection and failed update handling.');
 })();

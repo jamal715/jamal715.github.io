@@ -67,8 +67,8 @@ for(const key of ['zoom','x','y','fit']){
 $('reset-crop').onclick=()=>{if(!profile)return;checkpoint();profile.photoCrop={zoom:1,x:50,y:50,fit:'cover'};save();};
 $('connect-button').onclick=async()=>{
  const token=$('github-token').value.trim();$('github-token').value='';if(!token){$('connection-status').textContent='Enter a GitHub token to connect.';return;}
- $('connect-button').disabled=true;
- try{await ProfilePublisher.client(token)('/git/ref/heads/main');githubToken=token;$('connection-status').textContent='Connected for this tab. Select Publish to website to save your changes.';$('disconnect-button').disabled=false;$('github-connect').open=false;$('publish-status').textContent='GitHub connected. Your draft is ready to publish.';}catch(e){githubToken='';$('connection-status').textContent=e.message;}finally{$('connect-button').disabled=false;}
+ $('connect-button').disabled=true;$('connection-status').textContent='Checking repository read and write access…';
+ try{await ProfilePublisher.verifyWriteAccess(token);githubToken=token;$('connection-status').textContent='Write access verified for this tab. Select Publish to website to save your changes.';$('disconnect-button').disabled=false;$('github-connect').open=false;$('publish-status').textContent='GitHub write access verified. Your draft is ready to publish.';}catch(e){githubToken='';$('disconnect-button').disabled=true;$('connection-status').textContent=e.message;}finally{$('connect-button').disabled=false;}
 };
 $('disconnect-button').onclick=()=>{githubToken='';$('github-token').value='';$('disconnect-button').disabled=true;$('connection-status').textContent='Disconnected. The token has been cleared from this tab.';};
 function checkLive(result){

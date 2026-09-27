@@ -3,7 +3,31 @@
  const REPO='jamal715/jamal715.github.io',API='https://api.github.com/repos/'+REPO;
  const decode=b64=>new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s/g,'')),c=>c.charCodeAt(0)));
  const encode=bytes=>{let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s);};
- function client(token,fetcher=fetch){return async(path,method='GET',body)=>{const r=await fetcher(API+path,{method,headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),cache:'no-store'});if(!r.ok){const messages={401:'GitHub authorization expired or is invalid. Enter a valid token.',403:'GitHub refused access. Check that the token has Contents: Read and write for jamal715.github.io.',404:'Repository access was not granted. Select jamal715.github.io when creating the token.',409:'The repository changed while publishing. Reload published content and reapply your edits.',422:'GitHub could not accept this update. Check branch rules or reload the latest published content.'};throw Error(messages[r.status]||'GitHub request failed ('+r.status+'). Your draft is still saved.');}return r.status===204?null:r.json();};}
+ function client(token,fetcher=fetch){return async(path,method='GET',body)=>{
+  const r=await fetcher(API+path,{method,headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+token,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),cache:'no-store'});
+  if(!r.ok){
+   let detail={};try{detail=await r.json();}catch(e){}
+   const reason=String(detail.message||'').split(token).join('[redacted]').slice(0,500);
+   const required=r.headers?.get('x-accepted-github-permissions');
+   const rateLimited=r.status===429||r.headers?.get('x-ratelimit-remaining')==='0'||/rate limit/i.test(reason);
+   let advice='Your draft has been kept.';
+   if(rateLimited)advice='GitHub has rate-limited requests. Wait before trying again; changing token permissions will not help.';
+   else if(r.status===401)advice='The token is invalid, expired or revoked. Reconnect with a valid token.';
+   else if(r.status===403||r.status===404)advice='Check this token’s resource owner is jamal715, Repository access is Only select repositories → jamal715.github.io, and Contents is Read and write. Public repositories alone grants read-only access.';
+   else if(r.status===409)advice='The repository changed during publication. Back up your draft before reloading published content.';
+   else if(r.status===422)advice='GitHub could not accept this update. Check the reason above and repository rules. Your draft has been kept.';
+   const error=new Error(`GitHub ${r.status} at ${method} ${path.split('?')[0]}: ${reason||r.statusText||'Request failed'}. ${required?'Required permission: '+required+'. ':''}${advice}`);
+   error.status=r.status;throw error;
+  }
+  return r.status===204?null:r.json();
+ };}
+ async function verifyWriteAccess(token,fetcher=fetch){
+  const api=client(token,fetcher);
+  await api('/git/ref/heads/main');
+  // A tiny unattached Git object verifies Contents write access. It changes no file or branch.
+  await api('/git/blobs','POST',{content:'Portfolio editor write-access check\n',encoding:'utf-8'});
+  return true;
+ }
  async function publish({token,profile,baseline,assets,render,fetcher=fetch,onProgress=()=>{}}){
  if(!token)throw Error('Connect GitHub before publishing.');
  const api=client(token,fetcher);onProgress('Checking the latest published version…');
@@ -36,5 +60,5 @@
  await api('/git/refs/heads/main','PATCH',{sha:c.sha,force:false});
  return {profile:next,commit:c.sha};
  }
- const exported={publish,client};if(typeof module!=='undefined')module.exports=exported;else root.ProfilePublisher=exported;
+ const exported={publish,client,verifyWriteAccess};if(typeof module!=='undefined')module.exports=exported;else root.ProfilePublisher=exported;
 })(typeof window!=='undefined'?window:globalThis);
