@@ -6,12 +6,12 @@ Live website: https://jamal715.github.io/
 
 Open **https://jamal715.github.io/edit/**.
 
-1. Edit text, experience, projects and links in the form. Add or remove entries as needed.
-2. Select **Preview changes**. Choose Desktop or Mobile to inspect the layout.
+1. Edit text, experience, projects and links in the form. Add, remove or reorder entries as needed. Undo restores the last edit in the current session.
+2. Select **Preview changes**. Choose Desktop or Mobile to inspect the layout. The preview updates as you edit.
 3. Select **Download profile.json**.
 4. Select **Upload to GitHub**, upload the downloaded `profile.json`, and commit to `main`.
 
-Changes become live after GitHub Pages publishes. The editor saves drafts in your browser; it cannot publish by itself. Only a GitHub account with repository access can commit changes. Visitors cannot edit your live profile through the editor.
+Changes become live after GitHub Pages publishes. You can import a downloaded profile.json to resume editing. Text and selected file drafts survive a reload in the same browser; clearing browser data removes them. The editor saves drafts in your browser; it cannot publish by itself. Only a GitHub account with repository access can commit changes. Visitors cannot edit your live profile through the editor.
 
 ## Replace the downloadable CV
 
@@ -21,7 +21,7 @@ In the editor, expand **Replace your photo or downloadable CV**. Choose a PDF an
 
 ## Replace your photo
 
-Use the same panel to choose a JPG or PNG and download its renamed copy. Upload it into `assets` and commit. JPG uses `assets/profile.jpg`. For PNG, also download/upload `profile.json`, since the photo path changes to `assets/profile.png`.
+Use the same panel to choose a JPG or PNG, preview it, and download its renamed copy. Selected files are validated and limited to 20 MB. Upload it into `assets` and commit. JPG uses `assets/profile.jpg`. For PNG, also download/upload `profile.json`, since the photo path changes to `assets/profile.png`.
 
 The current photo comes from the existing repository. The display crop is controlled by `.portrait img` in `styles.css`.
 
