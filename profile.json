@@ -1,127 +1,215 @@
 {
   "name": "Jamal Nasir",
-  "headline": "Finance, mathematics and machine learning — put to work.",
-  "intro": "I move between financial risk, economic research and building models. My work spans electricity markets, agriculture, credit, international trade and language models: finding the question, working through the mathematics, and building something that can be tested and used.",
-  "current": "Consultant · EY MENA · ECL Valuation & Assurance",
+  "headline": "Enthusiastic to build and create!",
+  "intro": "I bring together economics, mathematics and code to solve real problems. I take a messy question, work out what actually needs answering, do the maths, and build something people can test and use. So far that has meant credit risk, electricity pricing, international trade, farming and language models. I learn new fields quickly and I see work through to the end.",
+  "current": "Consultant at EY",
   "photo": "assets/profile.jpg",
   "cv": "assets/Jamal-Nasir-CV.pdf",
   "email": "j.nasir25260@gmail.com",
   "linkedin": "https://linkedin.com/in/jamal-nasir-5696b3222",
   "github": "https://github.com/jamal715",
   "research": "https://jamal-nasir-research.vercel.app/",
-  "highlights": ["PKR 5.5bn in guarantee facilities evaluated", "24 entities in credit evaluation portfolio", "€7,000+ consulting revenue to date"],
+  "highlights": [
+    "PKR 5.5bn in guarantee facilities provided (about US$20 million)",
+    "24 entities in credit evaluation portfolio",
+    "€7,000+ consulting revenue to date",
+    "€1 million Mitigation Action Facility grant, as relationship manager"
+  ],
   "experience": [
     {
-      "role": "Consultant — ECL Valuation, Assurance",
+      "role": "Consultant, ECL Valuation & Assurance",
       "organization": "EY MENA",
       "dates": "October 2026–Present",
       "fields": "Forecasting · Credit risk · Valuation",
-      "points": ["Working on forecasting and expected credit loss (ECL) models for assurance and valuation engagements, reporting to the Partner."]
+      "points": [
+        "Building forecasting and expected credit loss (ECL) models, which estimate how much a lender may lose on its loans, for assurance and valuation work. Reporting to the Partner."
+      ]
     },
     {
       "role": "Financial Planning Analyst",
       "organization": "National Credit Guarantee Company Limited (NCGCL)",
       "dates": "May–October 2026",
-      "fields": "Financial institutions · Energy · Trade",
+      "fields": "Financial institutions · Energy · Guarantees",
       "points": [
-        "Conducted transaction evaluations and supported offer letters and guarantees for PKR 1.5bn with HBL Microfinance Bank and PKR 4.0bn with Bank Alfalah.",
-        "Developed ISMO-based electricity-price guarantee research and simulations for The price of a promise, connecting fixed prices, buyer contributions, reserve sizing and guarantor exposure.",
-        "Built and deployed Pakistan export intelligence to automate recurring analysis; worked on the LUMS-MAF returnable guarantee facility for the swappable battery programme.",
-        "Led Phase 2 development work for the Guarantee Management Portal, standardising data fields and reporting protocols across financial institutions."
+        "Evaluated transactions and helped put in place guarantees of PKR 1.5bn with HBL Microfinance Bank and PKR 4.0bn with Bank Alfalah.",
+        "Relationship manager for a €1 million Mitigation Action Facility (MAF) grant: a returnable guarantee facility with LUMS for a swappable-battery programme.",
+        "Researched and modelled guarantees on electricity prices using data from the national grid operator (ISMO): how fixed prices, buyer contributions and reserves change what the guarantor could lose. This became “The price of a promise”.",
+        "Built and deployed an export analysis app that replaced repeated manual work.",
+        "Led Phase 2 of the Guarantee Management Portal, standardising the data and reports that partner banks submit."
       ]
     },
     {
       "role": "Analyst",
       "organization": "The Pakistan Credit Rating Agency (PACRA)",
       "dates": "October 2025–April 2026",
-      "fields": "Energy · Construction · Credit analysis",
-      "points": ["Managed credit evaluations for a 24-entity portfolio, primarily in energy and construction, analysing capital structure, liquidity, coverage and cash flows."]
+      "fields": "Energy · Construction · Credit analysis & ratings",
+      "points": [
+        "Assessed the creditworthiness of 24 companies, mostly in energy and construction, looking at their debt, cash, ability to pay interest and cash flows."
+      ]
     },
     {
       "role": "Research Associate",
       "organization": "Project Indigenous Mechanization · Government of Punjab",
       "dates": "August 2025–January 2026",
       "fields": "Agriculture · Field research · Technology adoption",
-      "points": ["Worked with Dr. Shakeel Sadiq Jajja on indigenous e-mechanisation; engaged 50+ farmers, manufacturers and financial-sector stakeholders to understand adoption barriers and opportunities."]
+      "points": [
+        "Worked with Dr. Shakeel Sadiq Jajja on locally made electric farm machinery. Spoke with 50+ farmers, manufacturers and lenders to understand what holds adoption back and where the opportunities are."
+      ]
     },
     {
-      "role": "Executive Assistant — Strategic Planning Cell",
-      "organization": "Institute of Business Administration, Karachi",
+      "role": "Executive Assistant, Strategic Planning Cell",
+      "organization": "Institute of Business Administration (IBA), Karachi",
       "dates": "July–December 2024",
       "fields": "Higher education · Strategy · Performance analytics",
-      "points": ["Co-developed IBA’s five-year strategic plan across seven pillars, designed accreditation-aligned KPIs, and supported data modelling and institutional performance dashboards."]
+      "points": [
+        "Co-developed IBA’s five-year strategic plan across seven pillars, designed targets that match accreditation requirements, and supported data modelling and performance dashboards."
+      ]
     },
     {
       "role": "Independent ML Consultant (Remote)",
       "organization": "Ireland-based clients · QuantOra, Dublin",
       "dates": "October 2022–January 2024",
       "fields": "Agriculture · Forecasting · Classification",
-      "points": ["Served as an independent ML consultant to Ireland-based clients, delivering production-grade forecasting and classification systems.", "Built differential-equation models for Irish cattle–land saturation forecasting; mentored the team on an MNIST classification pipeline.", "Generated more than €7,000 in consulting revenue to date."]
+      "points": [
+        "Delivered forecasting and classification systems for clients in Ireland.",
+        "Built differential-equation models to forecast how many cattle Irish farmland can support; mentored the team on an image-recognition project.",
+        "Earned more than €7,000 in consulting fees."
+      ]
     }
   ],
   "projects": [
     {
       "title": "The price of a promise",
-      "category": "Electricity markets × Financial engineering",
-      "description": "What does it cost to fix electricity prices for a year? I developed research and a simulation model using ISMO demand and marginal-cost profiles to compare fixed-price choices, buyer contributions and the guarantor’s exposure when reserves are depleted.",
+      "category": "Model · Electricity markets",
+      "description": "What does it cost to promise a buyer a fixed electricity price for a year? A simulation built on real grid demand and cost data that shows how much the guarantor could lose, and how large a reserve it needs.",
       "methods": "Historical replay · Scenario simulation · Reserve sizing",
       "status": "Research in progress",
-      "links": [{"label": "Research & interactive model", "url": "https://jamal-nasir-research.vercel.app/article/price-of-a-promise"}]
+      "links": [
+        {
+          "label": "Research and interactive model",
+          "url": "https://jamal-nasir-research.vercel.app/article/price-of-a-promise"
+        }
+      ]
     },
     {
       "title": "Pakistan export intelligence",
-      "category": "International trade × Data engineering",
-      "description": "Built and deployed an interactive application that replaces repeated manual analysis with a view of Pakistan’s product mix, exporter concentration and market opportunities.",
-      "methods": "Python · Data pipelines · Interactive analytics",
+      "category": "Product · International trade",
+      "description": "A live app that replaces repeated manual analysis. It shows what Pakistan exports, how concentrated its exporters are, and where new markets could be.",
+      "methods": "Python · Data pipelines · Interactive dashboard",
       "status": "Live application",
-      "links": [{"label": "Open dashboard", "url": "https://pakistan-non-rice-food-export-intelligence-ncgcl.streamlit.app/"}, {"label": "Source code", "url": "https://github.com/jamal715/Pakistan--Food-Non-Rice-Export-Data-Deep-Dive"}]
+      "links": [
+        {
+          "label": "Open dashboard",
+          "url": "https://pakistan-non-rice-food-export-intelligence-ncgcl.streamlit.app/"
+        },
+        {
+          "label": "Source code",
+          "url": "https://github.com/jamal715/Pakistan--Food-Non-Rice-Export-Data-Deep-Dive"
+        }
+      ]
     },
     {
-      "title": "TinyLlama: fine-tuning and alignment",
-      "category": "Language models × Optimisation",
-      "description": "Fine-tuned the 1.1-billion-parameter TinyLlama model using LoRA and Direct Preference Optimization, evaluating instruction-following and question-answering behaviour on custom datasets.",
-      "methods": "PyTorch · LoRA · DPO · Model evaluation",
-      "status": "2025",
+      "title": "Credit and guarantee reviews",
+      "category": "Due diligence · Credit",
+      "description": "Reviewed 24 energy and construction companies and guarantee deals worth PKR 5.5bn: reading the accounts, testing the assumptions, and giving a clear view of the risk.",
+      "methods": "Financial analysis · Cash-flow review · Risk assessment",
+      "status": "2025–2026",
       "links": []
     },
     {
-      "title": "Derivative pricing & Monte Carlo simulation",
-      "category": "Stochastic mathematics × Finance",
-      "description": "Implemented Black–Scholes and Heston models in Python, and benchmarked Monte Carlo option-pricing simulations on NSE market data against Black–Scholes outputs.",
+      "title": "Loan servicing risk alerts",
+      "category": "Solution · Microfinance",
+      "description": "Early-warning models that flag microfinance borrowers likely to fall behind, so loan officers can step in sooner. I found the warning signs in the data and helped design how the model would be used day to day.",
+      "methods": "Credit risk · Classification",
+      "status": "2024",
+      "links": []
+    },
+    {
+      "title": "TinyLlama: fine-tuning and alignment",
+      "category": "Model · Language models",
+      "description": "Fine-tuned a small open-source language model (1.1 billion parameters) for more natural conversation using everyday dialogue data, and tested how well it follows instructions and answers questions.",
+      "methods": "PyTorch · LoRA · DPO",
+      "status": "2025",
+      "links": [
+        {
+          "label": "Model on Hugging Face",
+          "url": "https://huggingface.co/jamal07/tinyllama-finetuned-dialogue_byjamalnasir"
+        }
+      ]
+    },
+    {
+      "title": "Option pricing and simulation",
+      "category": "Model · Financial markets",
+      "description": "Priced options with the Black–Scholes and Heston models, and checked the results against Monte Carlo simulations on Indian stock market (NSE) data.",
       "methods": "Python · Stochastic processes · Simulation",
       "status": "2023",
       "links": []
     },
     {
-      "title": "Loan servicing risk alerts",
-      "category": "Microfinance × Machine learning",
-      "description": "Designed early-warning models to flag high-risk microfinance clients, identified predictive features and supported the workflow design for model deployment.",
-      "methods": "Credit risk · Classification · Early-warning models",
-      "status": "2024",
-      "links": []
-    },
-    {
       "title": "Optimisation in high dimensions",
-      "category": "Mathematical optimisation × Statistical learning",
-      "description": "Reviewed optimisation techniques and their mathematical derivations, then built and ran multiple models for high-dimensional logistic regression.",
+      "category": "Model · Statistical learning",
+      "description": "Worked through the maths behind common optimisation methods, then built and compared several models for prediction problems with many variables.",
       "methods": "Logistic regression · Numerical optimisation",
       "status": "2025",
       "links": []
     }
   ],
   "education": [
-    {"degree": "MS Financial Management", "institution": "Lahore University of Management Sciences", "year": "2025"},
-    {"degree": "BS Economics & Mathematics", "institution": "Institute of Business Administration, Karachi", "year": "2021"}
+    {
+      "degree": "MS Financial Management",
+      "institution": "Lahore University of Management Sciences",
+      "year": "2025"
+    },
+    {
+      "degree": "BS Economics & Mathematics",
+      "institution": "Institute of Business Administration, Karachi",
+      "year": "2021"
+    }
   ],
   "skills": [
-    {"area": "Programming & data", "detail": "Python, R, SQL, NumPy, pandas, SciPy, scikit-learn, PyTorch, TensorFlow"},
-    {"area": "Methods", "detail": "Credit risk, valuation, forecasting, econometrics, optimisation, simulation, machine learning"},
-    {"area": "Tools", "detail": "Excel, Power BI, Microsoft Azure, Git, LaTeX, EViews, MATLAB, Stata, SPSS"}
+    {
+      "area": "Programming & data",
+      "detail": "Python, R, SQL, NumPy, pandas, SciPy, scikit-learn, PyTorch, TensorFlow"
+    },
+    {
+      "area": "Methods",
+      "detail": "Credit risk, valuation, forecasting, econometrics, optimisation, simulation, machine learning"
+    },
+    {
+      "area": "Tools",
+      "detail": "Excel, Power BI, Microsoft Azure, Git, LaTeX, EViews, MATLAB, Stata, SPSS"
+    }
   ],
   "elsewhere": [
-    {"title": "Research & analysis", "description": "Energy markets, economics, model evaluation and the decisions behind the numbers.", "url": "https://jamal-nasir-research.vercel.app/"},
-    {"title": "Video explanations", "description": "Ideas and methods explained in another format.", "url": "https://www.youtube.com/watch?v=yjThZL2-lhk&list=PLQTMyxC6Vcb6-J7r5e2bcZQ-K3umrIHfF&index=2"},
-    {"title": "QuantOra", "description": "Research, analytics and quantitative problem-solving.", "url": "https://quantora-six.vercel.app/"}
+    {
+      "title": "Research & analysis",
+      "description": "Energy markets, economics, model evaluation and the decisions behind the numbers.",
+      "url": "https://jamal-nasir-research.vercel.app/"
+    },
+    {
+      "title": "Video explanations",
+      "description": "Ideas and methods explained in another format.",
+      "url": "https://www.youtube.com/watch?v=yjThZL2-lhk&list=PLQTMyxC6Vcb6-J7r5e2bcZQ-K3umrIHfF&index=2"
+    },
+    {
+      "title": "QuantOra",
+      "description": "Research, analytics and quantitative problem-solving.",
+      "url": "https://quantora-six.vercel.app/"
+    }
   ],
-  "contact": "Open to questions, research, collaborations and useful things we could build together."
+  "contact": "Send me the problem you’re working on. I’ll tell you honestly whether I can help, and how.",
+  "offer": [
+    {
+      "audience": "Founders",
+      "detail": "Pricing, risk and forecasting models. Turning raw data into a tool your team can use. A careful second look at the numbers before you commit."
+    },
+    {
+      "audience": "Researchers and professors",
+      "detail": "Modelling, simulation and data work in finance, energy, development and machine learning."
+    },
+    {
+      "audience": "Institutions",
+      "detail": "Credit assessment, guarantee design, and expected credit loss and valuation models."
+    }
+  ]
 }
