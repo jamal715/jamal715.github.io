@@ -1,6 +1,6 @@
 /* Shared renderer. All personal content lives in profile.json. */
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function safeURL(v){const s=String(v||'');return /^(https?:\/\/|mailto:|assets\/|#)/i.test(s)?esc(s):'#';}
+function safeURL(v){const s=String(v||'');return /^(https?:\/\/|mailto:|tel:|assets\/|#)/i.test(s)?esc(s):'#';}
 function photoStyle(d){
  const c=d.photoCrop||{zoom:2.05,x:53,y:43,fit:'cover'};
  const n=(v,lo,hi,fallback)=>Number.isFinite(Number(v))?Math.max(lo,Math.min(hi,Number(v))):fallback;
@@ -14,6 +14,7 @@ const DEFAULT_OFFER=[
 function renderProfile(d){
  const a=(url,label,cls='')=>`<a class="${cls}" href="${safeURL(url)}">${esc(label)}</a>`;
  const youtube=d.youtube||((d.elsewhere||[]).find(x=>/youtube\.com|youtu\.be/i.test(x.url||''))||{}).url||'';
+ const contact=(()=>{const raw=String(d.phone||(String(d.contact||'').match(/\+?\d[\d\s()-]{8,}\d/)||[''])[0]);const digits=raw.replace(/\D/g,'');const message=String(d.contact||'').replace(raw&&!d.phone?raw:'\u0000','').replace(/\s+([.,])/g,'$1').trim();const display=digits.startsWith('92')&&digits.length===12?`+92 ${digits.slice(2,5)} ${digits.slice(5)}`:(raw.trim().startsWith('+')?'+':'')+digits;return {digits:digits.length>=9?digits:'',display,message};})();
  const heading=(n,title,desc='')=>`<div class="section-label"><span>${n}</span><h2>${title}</h2>${desc?`<p>${desc}</p>`:''}</div>`;
  return `<section class="identity" aria-labelledby="name"><div class="identity-copy"><div class="kicker">Research · Models · Practice</div><h1 id="name">${esc(d.name)}</h1><p class="headline">${esc(d.headline)}</p><p class="intro">${esc(d.intro)}</p><p class="current">${esc(d.current)}</p><div class="linkline">${a(d.cv,'Download CV','download')}${a(d.research,'Research')}${a(d.github,'GitHub')}${a(d.linkedin,'LinkedIn')}${youtube?a(youtube,'YouTube'):''}</div></div><figure class="portrait" style="${photoStyle(d)}"><img src="${safeURL(d.photo)}" alt="Portrait" width="174" height="205"></figure></section>
  <div class="evidence">${d.highlights.map(x=>{const m=String(x).match(/^((?:[A-Z]{2,4}\s)?[€$£]?\d[\d.,]*\s?(?:million|billion|bn|mn|m|k)?\+?)\s+(.+)$/i);return m?`<div><b>${esc(m[1])}</b><span>${esc(m[2])}</span></div>`:`<div><span>${esc(x)}</span></div>`;}).join('')}</div>
@@ -22,6 +23,6 @@ function renderProfile(d){
  <section class="section" id="background">${heading('03','Foundation')}<div class="section-body foundation"><div>${d.education.map(x=>`<article class="degree"><h3>${esc(x.degree)}</h3><p>${esc(x.institution)} · ${esc(x.year)}</p></article>`).join('')}</div><dl>${d.skills.map(x=>`<dt>${esc(x.area)}</dt><dd>${esc(x.detail)}</dd>`).join('')}</dl></div></section>
  <section class="section" id="research">${heading('04','Elsewhere')}<div class="section-body elsewhere">${d.elsewhere.map(x=>`<a href="${safeURL(x.url)}"><div><h3>${esc(x.title)}</h3><p>${esc(x.description)}</p></div></a>`).join('')}</div></section>
  <section class="section" id="together">${heading('05','Working together')}<div class="section-body offer">${(Array.isArray(d.offer)&&d.offer.length?d.offer:DEFAULT_OFFER).map(x=>`<div><h3>${esc(x.audience)}</h3><p>${esc(x.detail)}</p></div>`).join('')}</div></section>
- <section class="section contact" id="contact">${heading('06','Let’s talk.')}<div class="section-body"><p>${esc(d.contact)}</p>${a('mailto:'+d.email,d.email,'email')}</div></section>`;
+ <section class="section contact" id="contact">${heading('06','Let’s talk.')}<div class="section-body">${contact.message?`<p>${esc(contact.message)}</p>`:''}<dl class="contact-list"><dt>Email</dt><dd>${a('mailto:'+d.email,d.email,'email')}</dd>${contact.digits?`<dt>Phone</dt><dd>${a('tel:+'+contact.digits,contact.display)}<span class="sep">·</span>${a('https://wa.me/'+contact.digits,'WhatsApp')}</dd>`:''}${d.linkedin?`<dt>LinkedIn</dt><dd>${a(d.linkedin,'Message me on LinkedIn')}</dd>`:''}</dl></div></section>`;
 }
 if(typeof module!=='undefined')module.exports={renderProfile};
